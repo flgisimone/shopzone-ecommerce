@@ -1,0 +1,14 @@
+.Loader{
+    animation: rotation .5s infinite linear;
+    font-size: 1.8rem;
+    display: flex;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

@@ -1,0 +1,112 @@
+.show{
+    display: flex;
+}
+
+.hidden{
+    display: none;
+}
+
+.Menu{
+    padding: 1rem 0;
+
+    .ContainerMenu{
+        display: flex;
+        justify-content: space-between;
+
+        a{
+            display: flex;
+            align-self: flex-start;
+            
+            img{
+                width: 100%;
+                height: 1.5rem;
+            }
+        }
+
+        nav{
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            .containerLink_wishlist_cart{     
+                display: flex;
+                align-self: flex-start;
+                gap: .5rem;
+
+                a{
+                    display: flex;
+                    font-size: 1.6rem;
+                    background-color: transparent;
+                    border: none;
+                    align-self: flex-start;
+                }
+            }
+            
+            .ulMenu{
+                flex-direction: column;
+                list-style-type: none;
+                align-items: flex-end;
+
+                li{
+                    a{
+                        color: #242424;
+                        font-size: 1rem;
+                        text-decoration: none;
+                    }
+                }
+
+                button{
+                    background-color: transparent;
+                    border: none;
+                    color: #FF7A00;
+                    font-weight: 600;
+                    font-size: 1rem;
+                }
+            }
+
+            .containerBtn{
+                display: flex;
+                align-self: flex-start;
+
+                button{
+                    background-color: transparent;
+                    border: none;
+                    color: #242424;
+                    font-size: 1.6rem;
+
+                    .btnCloseMenu{
+                        display: none;
+                    }
+
+                    i{
+                        font-size: 1.6rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px){
+
+    .Menu{
+        .ContainerMenu{
+            img{
+                width: 5.5%;
+                height: 5.5%;
+            }
+    
+            nav{
+                .ulMenu{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1rem;
+                }
+    
+                .containerBtn{
+                    display: none;
+                }
+            }
+        }
+    }
+}

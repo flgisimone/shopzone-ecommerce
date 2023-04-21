@@ -1,0 +1,60 @@
+.titlePage{
+    font-size: 2rem;
+}
+
+.Products{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btnLoadMore{
+    width: fit-content;
+    margin: auto;
+    background-color: transparent;
+    border: none;
+    padding: .5rem 0;
+
+    .containerLoadMore{
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        
+        .iconLoadMore{
+            font-size: 1.8rem;
+        }
+
+        span{
+            font-size: .9rem;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .Products{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+
+        .product{
+            width: 45%;
+        }
+    }    
+}
+
+@media screen and (min-width: 1200px) {
+    .Products{
+        .product{
+            width: 30%;
+        }
+    }    
+}
+
+@media screen and (min-width: 1200px) {
+    .Products{
+        .product{
+            width: 22%;
+        }
+    }    
+}

@@ -1,0 +1,115 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    
+    .goToPage{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        a{
+            width: 100%;
+            text-decoration: none;
+
+            .pageFavorite{
+                background-image: url("https://i.postimg.cc/RhkNFxn5/67511011-e5e4-47ca-9e1f-9e3e2a57dbcc.jpg");
+            }
+    
+            .pageContact{
+                background-image: url("https://i.postimg.cc/BQFjzbdq/fd4edd94-0919-429b-9f7f-b5b5c26ac8e3.jpg");
+            }
+
+            .pageFavorite,
+            .pageContact{
+                width: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 10rem;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                
+                h2{
+                    width: 40%;
+                    font-size: 1.5rem;
+                    margin-right: 1.5rem;
+                    text-align: right;
+                }
+            }
+        }
+    }
+    
+    .bottomHero{
+        background-image: url("https://i.postimg.cc/YCwvBkHQ/5e0bd16d-c49d-434c-8f49-0d0da2897322.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 12rem;
+        display: flex;
+        align-items: center;
+
+        h2{
+            width: 70%;
+            font-size: 1.5rem;
+            margin-left: 1.5rem;
+            line-height: 1.75rem;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .main{     
+        .bottomHero{
+            height: 14rem;
+    
+            h2{
+                width: 50%;
+                font-size: 2rem;
+                margin-left: 1.5rem;
+                line-height: 2rem;
+            }
+        }
+    }   
+}
+
+@media screen and (min-width: 1200px) {
+    .main{
+        .goToPage{
+            flex-direction: row;
+            justify-content: space-between;
+    
+            a{
+                .pageFavorite,
+                .pageContact{
+                    height: 12rem;
+                }
+            }
+        }
+    
+        .bottomHero{
+            height: 20rem;
+    
+            h2{
+                width: 40%;
+                line-height: 2.5rem;
+                font-size: 2.5rem;
+            }
+        }
+    }    
+}
+
+@media screen and (min-width: 1500px) {
+    .main{
+    
+        .bottomHero{
+            height: 25rem;
+    
+            h2{
+                width: 70%;
+                font-size: 2.5rem;
+            }
+        }
+    }    
+}

@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: #242424;
+}
+
+body{
+   background-color: #FBFBFB;
+}
+
+button{
+  cursor: pointer;
+}
