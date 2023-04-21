@@ -1,23 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import emailjs from '@emailjs/browser';
-import { useGlobalContext } from '@/context';
 
 import styles from "../styles/Checkout.module.scss"
 
 const Checkout = () => {
-
-  const { 
-    cart, setCart
-   } = useGlobalContext()
 
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
   const [expiry, setExpiry] = useState("")
   const [cvc, setCvc] = useState("")
   const [totalPayment, setTotalPayment] = useState(0)
+  const [summaryCart, setSummaryCart] = useState([])
   const [paymentMethod, setPaymentMethod] = useState("")
-  const [cartProduct, setCartProduct] = useState([])
+  const [priceQty, setPriceQty] = useState(0)
 
   const onHandleName = (e) => setName(e.target.value)
   const onHandleNumber = (e) => setNumber(e.target.value)
@@ -39,26 +35,12 @@ const Checkout = () => {
   }, [])
 
   useEffect(() => {
-    const savedCart = []
     for(const key in localStorage){
-      if(key.startsWith("CartProduct: ")){
-        const productData = JSON.parse(localStorage.getItem(key))
-        savedCart.push(productData)
+      if(key.startsWith("OrderCart")){
+        const totalSummary = JSON.parse(localStorage.getItem(key))
+        setSummaryCart(totalSummary)
       }
     }
-    setCart(savedCart)
-    localStorage.setItem('OrderCart', JSON.stringify(cart));
-  }, [])
-
-  useEffect(() => {
-    const checkoutCart = []
-    for(const key in localStorage){
-      if(key.startsWith("OrderCart: ")){
-        const productData = JSON.parse(localStorage.getItem(key))
-        checkoutCart.push(productData)
-      }
-    }
-    setCartProduct(checkoutCart)
   }, [])
 
   const form = useRef();
@@ -69,6 +51,8 @@ const Checkout = () => {
       if(key.startsWith("TotalCart")) localStorage.removeItem(key);
       if(key.startsWith("CartProduct")) localStorage.removeItem(key);
     }
+
+    window.location.href = "/thankyoupage"
 
     emailjs.sendForm('service_afp03sz', 'template_j8gbpuf', form.current, 'vvSqsU-fF1YN9n3dg')
     .then((result) => {
@@ -81,7 +65,7 @@ const Checkout = () => {
   return (
     <section className={styles.Checkout}>
       <h1>Checkout</h1>
-      <span >Total Order: {totalPayment}$</span>
+      <h3>Total Order: {totalPayment}$</h3>
       <form ref={form} onSubmit={onHandlePaymentComplete}>
       <input type="hidden" name="totalPayment" value={totalPayment}/>
       <fieldset className={styles.fieldsetCard}>
@@ -179,6 +163,33 @@ const Checkout = () => {
         </fieldset>
         <input type="submit" value="Complete Order"/>
       </form>
+
+      <div className={styles.cartSummary}>
+        <h2>Summary Order</h2>
+        <div className={styles.containerCartSummary}>
+          {
+            summaryCart.map(prod => 
+              <div className={styles.prodSummary}>
+                <div className={styles.product} key={prod.id}>
+                  <Image
+                  src={prod.image}
+                  width={50}
+                  height={50}
+                  alt={prod.title}
+                  />
+                  <span className={styles.title}>{prod.title}</span>
+                  {
+                    prod.quantity > 1 ? 
+                    <span className={styles.qtyPrice}>{prod.quantity} x {prod.price}$</span> 
+                    : 
+                    <span className={styles.qtyPrice}>1 x {prod.price}$</span>
+                  }
+                </div>
+              </div>
+              )
+          }
+        </div>
+      </div>
     </section>
   )
 }

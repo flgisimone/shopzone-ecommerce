@@ -1,14 +1,3 @@
-/**
- * This page is responsible for managing user access to the platform.
- 
- * The "useEffect" is used to make a call to an external API, 
- * the "useGlobalContext for managing states through and conditionally rendering certain HTML elements based on the state of the component, 
- * choosing between displaying the Login form or the Registration form.
- 
- * The login form requires the user's email and password to log in.
- * It is validated and once the user is authenticated, the component saves the login data in the Local Storage and redirects the user to the home page.
- */
-
 import Head from "next/head"
 import { useEffect } from "react"
 import { useGlobalContext } from "@/context"

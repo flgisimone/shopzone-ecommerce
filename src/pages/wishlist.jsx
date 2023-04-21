@@ -14,7 +14,7 @@ const Wishlist = () => {
   useEffect(() => {
     const savedFavorite = []
     for(const key in localStorage){
-      if(key.startsWith("FavoriteProduct: ")){
+      if(key.startsWith("FavoriteProduct")){
         const productData = JSON.parse(localStorage.getItem(key))
         savedFavorite.push(productData)
       }
@@ -25,12 +25,12 @@ const Wishlist = () => {
   const onHandleRemove = (productRemove) => {
     for (const key in localStorage) {
       if(key === `FavoriteProduct: ${productRemove.title}`){
-        localStorage.removeItem(key);
+        localStorage.removeItem(key)
       }
     }
     setFavorites((prevFavorites) =>
       prevFavorites.filter((product) => product.id !== productRemove.id)
-    );
+    )
   }
 
   const onClickRemove = () => {

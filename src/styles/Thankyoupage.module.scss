@@ -1,0 +1,10 @@
+.Thankyoupage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    svg{
+        font-size: 5rem;
+    }
+}

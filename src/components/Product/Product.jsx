@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from "next/link"
 
+import { useGlobalContext } from '@/context';
+
 import { 
   BsFillPeopleFill, BsStarFill, BsStarhalf, BsStar, 
   BsCart, BsCartCheckFill, 
@@ -13,7 +15,7 @@ const Product = ({data}) => {
 
     const [favorite, setFavorite] = useState(false)
     const [cart, setCart] = useState(false)
-    const [cartArray, setCartArray] = useState([])
+    const [cartProduct, setCartProduct] = useState([])
 
     const starCreator = (num) => {
       return Array.from({length: 5}, (_, index) => {
@@ -23,6 +25,7 @@ const Product = ({data}) => {
       })
     }
 
+    //aggiunta al localStorage per favoriti
     useEffect(() => {
         const key = `FavoriteProduct: ${data?.title}`
         const value = localStorage.getItem(key)
@@ -43,7 +46,9 @@ const Product = ({data}) => {
             setFavorite(true)
           }
     }
+    //--------------------------------
 
+    //Logica aggiunta al localStorage per carrello
     useEffect(() => {
       const key = `CartProduct: ${data?.title}`
       const value = localStorage.getItem(key)
@@ -63,9 +68,8 @@ const Product = ({data}) => {
           localStorage.setItem(key, value)
           setCart(true)
         }
-    }
-    
-    console.log(cartArray)
+    }  
+    //--------------------------------
 
   return (
     <div className={styles.Product}>

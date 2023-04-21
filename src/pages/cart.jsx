@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { useGlobalContext } from '@/context'
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,65 +8,67 @@ import { IoIosArrowDroprightCircle } from 'react-icons/io';
 import styles from "../styles/Cart.module.scss"
 
 const Cart = () => {
-
-    const { cart, setCart } = useGlobalContext()
-
-    const [total, setTotal] = useState(0)
-    const [tax, setTax] = useState(0);
-    const [quantity, setQuantity] = useState({})   
-
-    useEffect(() => {
-        const savedCart = []
-        for(const key in localStorage){
-          if(key.startsWith("CartProduct: ")){
-            const productData = JSON.parse(localStorage.getItem(key))
-            savedCart.push(productData)
-          }
-        }
-        setCart(savedCart)
-      }, [])
-
-      useEffect(() => {
-        let sum = 0;
-        cart.forEach(product => {
-          const quantity = product.quantity || 1
-          sum += product.price * quantity
-        });
-        setTotal(sum)
-        setTax(sum * 0.22)
-      }, [cart])
-
-      useEffect(() => {
-        setQuantity(cart.map((product) => product.quantity || 1))
-      }, [cart])
-
-      const onHandleQuantity = (productId, e) => {
-        const newCart = [...cart]
-        const index = newCart.findIndex((product) => product.title === productId)
-        newCart[index].quantity = e.target.value
-        setCart([...newCart])
-      
-        localStorage.setItem(
-          `CartProduct: ${productId}`,
-          JSON.stringify({
-            ...cart[index],
-            quantity: e.target.value,
-          })
-        )
+  
+  const { cart, setCart } = useGlobalContext()
+  
+  const [total, setTotal] = useState(0)
+  const [tax, setTax] = useState(0)
+  const [quantity, setQuantity] = useState([])
+  const [savedCart, setSavedCart] = useState([])   
+  
+  useEffect(() => {
+    for(const key in localStorage){
+      if(key.startsWith("CartProduct")){
+        const productData = JSON.parse(localStorage.getItem(key))
+        savedCart.push(productData)
       }
+    }
+    setCart(savedCart)
+  }, [setCart])
+  
+  useEffect(() => {
+    let sum = 0
+    cart.forEach(product => {
+      const quantity = product.quantity || 1
+      sum += product.price * quantity
+    })
+    setTotal(sum)
+    setTax(sum * 0.22)
+  }, [cart])
+  
+  useEffect(() => {
+    setQuantity(cart.map((product) => product.quantity || 1))
+  }, [cart])
 
-      const onHandleRemove = (productRemove) => {
-        for (const key in localStorage) {
-          if(key === `CartProduct: ${productRemove.title}` || key === `CartProduct: ${productRemove.id}`){
-            localStorage.removeItem(key);
-          }
-        }
-        setCart((prevCart) =>
-        prevCart.filter((product) => product.id !== productRemove.id)
-        );
+  localStorage.setItem('OrderCart', JSON.stringify(cart));
+  
+  const onHandleQuantity = (productId, e) => {
+    const newCart = [...cart]
+    const index = newCart.findIndex((product) => product.title === productId)
+    newCart[index].quantity = e.target.value
+    setCart([...newCart])
+    
+    localStorage.setItem(
+      `CartProduct: ${productId}`,
+      JSON.stringify({
+        ...cart[index],
+        quantity: e.target.value,
       }
+      )
+    )
+  }
+    
+    const onHandleRemove = (productRemove) => {
+      for(const key in localStorage){
+        if(key === `CartProduct: ${productRemove.title}` || key === `CartProduct: ${productRemove.id}`)
+        {
+          localStorage.removeItem(key)
+        }
+      }
+      setCart((prevCart) => prevCart.filter((product) => product.id !== productRemove.id))
+    }
 
-      localStorage.setItem("TotalCart", (total + tax)?.toFixed(2))
+    localStorage.setItem("TotalCart", (total + tax)?.toFixed(2))
 
   return (
     <section className={styles.Cart}>
@@ -107,13 +109,12 @@ const Cart = () => {
                 {
                   cart.map(product => 
                   <div className={styles.product} key={product.id}>
-                      <input 
-                      type="number" 
+                      <input type="number" 
                       id={`quantity-${product.id}`} 
                       name={`quantity-${product.id}`} 
                       min="1" max="99" 
-                      value={quantity.find((q, i) => cart[i].id === product.id)} 
-                      onChange={(e) => onHandleQuantity(product.title, e)}></input>
+                      value={Array.isArray(quantity) && quantity.find((q, i) => cart[i].id === product.id)}
+                      onChange={(e) => onHandleQuantity(product.title, e)} />
                   </div>)
                   } 
               </div>
