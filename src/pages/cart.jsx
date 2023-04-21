@@ -7,7 +7,7 @@ import { IoIosArrowDroprightCircle } from 'react-icons/io';
 
 import styles from "../styles/Cart.module.scss"
 
-const cart = () => {
+const Cart = () => {
 
     const { cart, setCart } = useGlobalContext()
 
@@ -141,4 +141,4 @@ const cart = () => {
   )
 }
 
-export default cart
+export default Cart
