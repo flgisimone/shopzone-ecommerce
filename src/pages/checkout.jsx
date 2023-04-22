@@ -2,18 +2,24 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import emailjs from '@emailjs/browser';
 
+import Loader from '@/components/Loader/Loader';
+
+import { useGlobalContext } from '@/context';
+
 import styles from "../styles/Checkout.module.scss"
 
 const Checkout = () => {
 
+  const { isLoading, setIsLoading, email } = useGlobalContext()
+  
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
   const [expiry, setExpiry] = useState("")
   const [cvc, setCvc] = useState("")
   const [totalPayment, setTotalPayment] = useState(0)
-  const [summaryCart, setSummaryCart] = useState([])
+  const [orderCart, setOrderCart] = useState([])
   const [paymentMethod, setPaymentMethod] = useState("")
-  const [priceQty, setPriceQty] = useState(0)
+  const [idOrder, setIdOrder] = useState("")
 
   const onHandleName = (e) => setName(e.target.value)
   const onHandleNumber = (e) => setNumber(e.target.value)
@@ -21,6 +27,17 @@ const Checkout = () => {
   const onHandleCvc = (e) => setCvc(e.target.value)
   const onHandlePaymentMethod = (e) => {
     setPaymentMethod(e.target.value);
+  }
+
+  useEffect(() => {
+    setIdOrder("#" + Math.random().toString(16).slice(2))
+  }, [])
+
+  const templateParams = {
+    email,
+    idOrder,
+    totalPayment: totalPayment,
+    orderCart: orderCart.map(item => `Product: ID.${item.id} - ${item.title} | ${item.quantity > 1 ? item.quantity : 1} x ${item.price}$`).join("\n")
   }
 
   useEffect(() => {
@@ -38,7 +55,7 @@ const Checkout = () => {
     for(const key in localStorage){
       if(key.startsWith("OrderCart")){
         const totalSummary = JSON.parse(localStorage.getItem(key))
-        setSummaryCart(totalSummary)
+        setOrderCart(totalSummary)
       }
     }
   }, [])
@@ -50,9 +67,14 @@ const Checkout = () => {
     for(const key in localStorage){
       if(key.startsWith("TotalCart")) localStorage.removeItem(key);
       if(key.startsWith("CartProduct")) localStorage.removeItem(key);
+      if(key.startsWith("OrderCart")) localStorage.removeItem(key);
     }
-
-    window.location.href = "/thankyoupage"
+  
+    setIsLoading(true);
+      setTimeout(() => {
+          setIsLoading(false);
+          window.location.href = "/thankyoupage"
+      }, 1000); 
 
     emailjs.sendForm('service_afp03sz', 'template_j8gbpuf', form.current, 'vvSqsU-fF1YN9n3dg')
     .then((result) => {
@@ -64,10 +86,42 @@ const Checkout = () => {
 
   return (
     <section className={styles.Checkout}>
-      <h1>Checkout</h1>
-      <h3>Total Order: {totalPayment}$</h3>
+      <h1>Checkout Order {idOrder}</h1>
+      <h2>Total Order: {totalPayment}$</h2>
+      <div className={styles.cartSummary}>
+        <h3>Summary Order</h3>
+        <div className={styles.containerCartSummary}>
+          {
+            orderCart.map(prod => 
+              <div className={styles.prodSummary} key={prod.id}>
+                <div className={styles.product}>
+                  <Image
+                  src={prod.image}
+                  width={50}
+                  height={50}
+                  alt={prod.title}
+                  />
+                  <div className={styles.qty_price}>
+                    <span className={styles.title}>{prod.title}</span>
+                    {
+                      prod.quantity > 1 ? 
+                      <span className={styles.qtyPrice}>{"Qty. " + prod.quantity} x {prod.price}$</span> 
+                      : 
+                      <span className={styles.qtyPrice}>{"Qty. 1 x" + prod.price}$</span>
+                    }
+                  </div>
+                </div>
+              </div>
+              )
+          }
+        </div>
+      </div>
+      <hr className={styles.separated}/>
       <form ref={form} onSubmit={onHandlePaymentComplete}>
-      <input type="hidden" name="totalPayment" value={totalPayment}/>
+      <input type="hidden" name="emailCustomer" value={templateParams.email}/>
+      <input type="hidden" name="idOrder" value={templateParams.idOrder}/>
+      <input type="hidden" name="totalPayment" value={templateParams.totalPayment}/>
+      <input type="hidden" name="orderCart" value={templateParams.orderCart}/>
       <fieldset className={styles.fieldsetCard}>
           <legend className={styles.legendCardName}>
             Choose Payment Method
@@ -142,7 +196,10 @@ const Checkout = () => {
             value={number} 
             onChange={onHandleNumber} 
             minLength={16} maxLength={16}
-            required autoComplete='off'/>
+            pattern="[0-9]+"
+            title="Solo number is accepted."
+            required 
+            autoComplete='off'/>
 
             <div className={styles.expiryDate}>
               <span>Expiry</span>
@@ -150,46 +207,21 @@ const Checkout = () => {
               min="" value={expiry} 
               onChange={onHandleExpiry} 
               required autoComplete='off'/>
+              <input type="text"
+              className={styles.cvc} 
+              value={cvc} 
+              placeholder="CVC" 
+              pattern="[0-9]+"
+              title="Solo number is accepted."
+              onChange={onHandleCvc}            
+              minLength={3} maxLength={3}
+              required autoComplete='off'/>              
             </div>
-
-            <input type="text"
-            className={styles.cvc} 
-            value={cvc} 
-            placeholder="CVC" 
-            onChange={onHandleCvc}            
-            minLength={3} maxLength={3}
-            required autoComplete='off'/>
           </div>
         </fieldset>
-        <input type="submit" value="Complete Order"/>
+        {isLoading ? <Loader /> : 
+        <input type="submit" value="Complete Order"/>}
       </form>
-
-      <div className={styles.cartSummary}>
-        <h2>Summary Order</h2>
-        <div className={styles.containerCartSummary}>
-          {
-            summaryCart.map(prod => 
-              <div className={styles.prodSummary}>
-                <div className={styles.product} key={prod.id}>
-                  <Image
-                  src={prod.image}
-                  width={50}
-                  height={50}
-                  alt={prod.title}
-                  />
-                  <span className={styles.title}>{prod.title}</span>
-                  {
-                    prod.quantity > 1 ? 
-                    <span className={styles.qtyPrice}>{prod.quantity} x {prod.price}$</span> 
-                    : 
-                    <span className={styles.qtyPrice}>1 x {prod.price}$</span>
-                  }
-                </div>
-              </div>
-              )
-          }
-        </div>
-      </div>
     </section>
   )
 }

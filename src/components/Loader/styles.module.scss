@@ -2,6 +2,8 @@
     animation: rotation .5s infinite linear;
     font-size: 1.8rem;
     display: flex;
+    width: fit-content;
+    margin: auto;
 }
 
 @keyframes rotation {

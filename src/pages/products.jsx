@@ -1,14 +1,3 @@
-/**
- * This page shows the list of products retrieved from the API called "https://api.escuelajs.co/api/v1/products", 
- * through the fetch performed by server-side rendering: generated first server-side and then sent to the client. 
- 
- * The useGlobalContext() hook allows state sharing between components, both for the loader and for rendering subsequent products.
- 
- * In addition, a "Load more" button is shown that, when clicked, loads more products from the API: 12 at a time.
- 
- * P.S. A timemout of 500ms has been inserted to show the loader. 
- */
-
 import Head from "next/head";
 import { useGlobalContext } from "@/context";
 
