@@ -12,19 +12,6 @@ const Signup = () => {
   const [password, setPassword] = useState("")
   const [userPost, setUserPost] = useState("")
   const [successful, setSuccessful] = useState(false)
-  
-  let generator = require('generate-password');
-  
-  let passwordGen = generator.generate({
-    length: 8,
-    uppercase: true,
-    lowercase: true,
-    numbers: true,
-  });
-
-  const onHandleGeneratePassword = () => {
-    setPassword(passwordGen)
-  }
 
   const onHandleName = (e) => setName(e.target.value);
   const onHandleEmail = (e) => setEmail(e.target.value);
@@ -38,6 +25,10 @@ const Signup = () => {
       password,
     })
     setSuccessful(true)
+
+    setTimeout(() => {
+      window.location.href = "/login"
+    }, 1000); 
   }
 
   useEffect(() => {
@@ -68,7 +59,6 @@ const Signup = () => {
               <li>at least a number</li>
               <li>minimum 8 characters</li>
             </ul>
-            <button onClick={onHandleGeneratePassword}><MdOutlinePassword className={styles.iconGenPass}/> Generate Password</button>
           </div>
           <span className={successful ? `${styles.show}` : `${styles.hidden}`}>Registration successful!</span>
           <input type="submit" value="Sign Up" />

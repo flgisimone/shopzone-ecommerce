@@ -10,7 +10,7 @@ import styles from "../styles/Checkout.module.scss"
 
 const Checkout = () => {
 
-  const { isLoading, setIsLoading, email } = useGlobalContext()
+  const { isLoading, setIsLoading } = useGlobalContext()
   
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
@@ -20,6 +20,7 @@ const Checkout = () => {
   const [orderCart, setOrderCart] = useState([])
   const [paymentMethod, setPaymentMethod] = useState("")
   const [idOrder, setIdOrder] = useState("")
+  const [email, setEmail] = useState("")
 
   const onHandleName = (e) => setName(e.target.value)
   const onHandleNumber = (e) => setNumber(e.target.value)
@@ -28,6 +29,17 @@ const Checkout = () => {
   const onHandlePaymentMethod = (e) => {
     setPaymentMethod(e.target.value);
   }
+
+  useEffect(() => {
+    const emailMessage = []
+    for(const key in localStorage){
+      if(key.startsWith("email")){
+        const email = JSON.parse(localStorage.getItem(key))
+        emailMessage.push(email)
+      }
+    }
+    setEmail(emailMessage[0].email)
+  }, [])
 
   useEffect(() => {
     setIdOrder("#" + Math.random().toString(16).slice(2))
@@ -70,7 +82,7 @@ const Checkout = () => {
       if(key.startsWith("OrderCart")) localStorage.removeItem(key);
     }
   
-    setIsLoading(true);
+    setIsLoading(true)
       setTimeout(() => {
           setIsLoading(false);
           window.location.href = "/thankyoupage"
