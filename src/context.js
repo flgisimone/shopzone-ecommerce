@@ -5,7 +5,7 @@ const AppContext = React.createContext()
 const AppProvider = ({children}) => {
 
     const [user, setUser] = useState()
-    const [showProduct, setShowProduct] = useState(4)
+    const [showProduct, setShowProduct] = useState(5)
     const [isLoading, setIsLoading] = useState(false)
     const [favorites, setFavorites] = useState([])
     const [firstName, setFirstName] = useState("")

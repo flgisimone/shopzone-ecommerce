@@ -57,12 +57,20 @@
                     }
                 }
 
+                .subMenu{
+                    display: flex;
+                    align-items: center;
+                    border-right: 2px solid #FF7A00;
+                    padding-right: .5rem;
+                    cursor: pointer;
+                }
+
                 .subUlMenu{
                     display: flex;
                     flex-direction: column;
                     list-style-type: none;
-                    border-right: 2px solid #FF7A00;
-                    padding-right: 1rem;
+                    border-right: 1px solid #FF7A00;
+                    padding-right: .5rem;
                     gap: .25rem;
                     
                     li{

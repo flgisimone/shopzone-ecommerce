@@ -17,8 +17,6 @@ const Login = () => {
     invalidLogin, setInvalidLogin
   } = useGlobalContext()
 
-  const [count, setCount] = useState(3);
-
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/users")
     .then(res => res.json())

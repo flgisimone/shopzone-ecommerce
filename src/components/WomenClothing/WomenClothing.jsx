@@ -18,7 +18,10 @@ const WomenClothing = () => {
 
   return (
     <section className={styles.Category}>
-        <h3>Women's Clothing</h3>
+        <div className={styles.headerCategory}>
+            <h3>Women's Clothing</h3>
+            <Link href={"/womens_clothing"} className={styles.goToPage}><BsFillArrowRightCircleFill /></Link>   
+        </div>
         <div className={styles.subContainerCategory}>
             <div className={styles.containerCategoryProduct}>
             {
@@ -29,7 +32,6 @@ const WomenClothing = () => {
                 )
             }              
             </div>
-            <Link href={"/products"} className={styles.goToPage}><BsFillArrowRightCircleFill /></Link>   
         </div>   
     </section>
   )

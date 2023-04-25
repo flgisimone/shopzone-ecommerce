@@ -18,7 +18,10 @@ const Electronics = () => {
 
   return (
     <section className={styles.Category}>
-        <h3>Electronics</h3>
+        <div className={styles.headerCategory}>
+            <h3>Electronics</h3>
+            <Link href={"/electronics"} className={styles.goToPage}><BsFillArrowRightCircleFill /></Link>   
+        </div>
         <div className={styles.subContainerCategory}>
             <div className={styles.containerCategoryProduct}>
             {
@@ -29,7 +32,6 @@ const Electronics = () => {
                 )
             }              
             </div>
-            <Link href={"/products"} className={styles.goToPage}><BsFillArrowRightCircleFill /></Link>   
         </div>   
     </section>
   )

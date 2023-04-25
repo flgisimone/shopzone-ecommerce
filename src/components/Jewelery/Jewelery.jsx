@@ -18,7 +18,10 @@ const Jewelery = () => {
 
   return (
     <section className={styles.Category}>
-        <h3>Jewelery</h3>
+        <div className={styles.headerCategory}>
+            <h3>Jewelery</h3>
+            <Link href={"/jewelery"} className={styles.goToPage}><span>Discover more</span><BsFillArrowRightCircleFill /></Link>   
+        </div>
         <div className={styles.subContainerCategory}>
             <div className={styles.containerCategoryProduct}>
             {
@@ -28,8 +31,7 @@ const Jewelery = () => {
                 </div>
                 )
             }              
-            </div>
-            <Link href={"/products"} className={styles.goToPage}><BsFillArrowRightCircleFill /></Link>   
+            </div> 
         </div>       
     </section>
   )

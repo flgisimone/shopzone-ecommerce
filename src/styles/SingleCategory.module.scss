@@ -1,0 +1,41 @@
+.categoryPage{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    .containerCategoryPage{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+
+        .productCategory{
+            width: 47.5%;
+            margin: auto;
+        }
+    }
+
+
+    .btnLoadMore{
+        width: fit-content;
+        margin: auto;
+        background-color: transparent;
+        border: none;
+        padding: .5rem 0;
+    
+        .containerLoadMore{
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            
+            .iconLoadMore{
+                font-size: 1.8rem;
+            }
+    
+            span{
+                font-size: .9rem;
+            }
+        }
+    }
+}

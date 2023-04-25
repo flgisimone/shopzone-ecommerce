@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { AiOutlineMenu, AiFillCloseCircle } from 'react-icons/ai';
-import { BsHeartFill, BsCartFill} from 'react-icons/bs';
+import { BsHeartFill, BsCartFill } from 'react-icons/bs';
+import { CiMenuKebab } from 'react-icons/ci';
 
 import styles from "./styles.module.scss"
 
@@ -65,25 +66,25 @@ const Navbar = () => {
         </Link>
         <nav>
           <div className={styles.containerLink_wishlist_cart}>
-            <Link href={"/wishlist"}><BsHeartFill color="#242424" fill='#242424'/></Link>
-            <Link href={"/cart"}><BsCartFill color="#242424" fill='#242424'/></Link>
+            <Link href={"/wishlist"} onClick={btnClosenMenu}><BsHeartFill color="#242424" fill='#242424'/></Link>
+            <Link href={"/cart"} onClick={btnClosenMenu}><BsCartFill color="#242424" fill='#242424'/></Link>
             <div className={styles.containerBtn}>
               <button onClick={btnOpenMenu} className={!openMenu ? `${styles.btnOpenMenu} ${styles.show}` : `${styles.btnOpenMenu} ${styles.hidden}`}><AiOutlineMenu /></button>
               <button onClick={btnClosenMenu} className={openMenu ? `${styles.btnClosenMenu} ${styles.show}` : `${styles.btnClosenMenu} ${styles.hidden}`}><AiFillCloseCircle /></button>
             </div>
           </div>
           <ul className={openMenu ? `${styles.ulMenu} ${styles.show}` : `${styles.ulMenu} ${styles.hidden}`} role="menu">
-            <li><Link href={"/"}>HOME</Link></li>
+            <li onClick={btnClosenMenu}><Link href={"/"}>HOME</Link></li>
             <li onClick={btnSubMenu} className={styles.subMenu}>CATEGORIES</li>
             <ul className={openSubMenu ? `${styles.show} ${styles.subUlMenu}` : `${styles.hidden}`}>
-              <li><Link href={"/electronics"}>Electronics</Link></li>
-              <li><Link href={"/jewelery"}>Jewelery</Link></li>
-              <li><Link href={"/men_clothing"}>Men's Clothing</Link></li>
-              <li><Link href={"/women_clorhing"}>Women's Clothing</Link></li>
+              <li onClick={btnClosenMenu}><Link href={"/electronics"}>Electronics</Link></li>
+              <li onClick={btnClosenMenu}><Link href={"/jewelery"}>Jewelery</Link></li>
+              <li onClick={btnClosenMenu}><Link href={"/mens_clothing"}>Men's Clothing</Link></li>
+              <li onClick={btnClosenMenu}><Link href={"/womens_clothing"}>Women's Clothing</Link></li>
             </ul>
-            <li><Link href={"/cart"}>CART</Link></li>
-            <li><Link href={"/wishlist"}>WISHLIST</Link></li>
-            <li><Link href={"/contact"}>CONTACT</Link></li>
+            <li onClick={btnClosenMenu}><Link href={"/cart"}>CART</Link></li>
+            <li onClick={btnClosenMenu}><Link href={"/wishlist"}>WISHLIST</Link></li>
+            <li onClick={btnClosenMenu}><Link href={"/contact"}>CONTACT</Link></li>
             {
               user ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
             }

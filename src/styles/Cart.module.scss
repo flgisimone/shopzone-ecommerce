@@ -116,4 +116,26 @@
             }
         }
     }
+
+    .wishlistProducts{
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+
+        .listFavorite{
+            display: flex;
+            overflow-x: hidden;
+            overflow-x: scroll;
+            gap: 1rem;
+
+            .product{
+                width: 10rem;
+                padding-bottom: 1rem;
+            }
+        }
+
+        .listFavorite::-webkit-scrollbar{
+            display: none;
+        }
+    }
 }
