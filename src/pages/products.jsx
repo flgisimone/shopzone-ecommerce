@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useGlobalContext } from "@/context";
 
 import Product from "@/components/Product/Product"
+import MenClothing from "@/components/MenClothing/MenClothing";
 import Loader from "@/components/Loader/Loader"
 
 import { MdReadMore } from 'react-icons/md';
@@ -30,6 +31,7 @@ const Products = ({data}) => {
     </Head>
     <h1 className={styles.titlePage}>Products</h1>
     <section className={styles.Products}>
+
         {
           data?.slice(0, showProduct)
           .map((product , index) => 

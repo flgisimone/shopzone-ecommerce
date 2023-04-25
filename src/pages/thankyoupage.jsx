@@ -21,8 +21,8 @@ const Thankyoupage = () => {
       window.location.href = '/'
     }
 
-    return () => clearInterval(interval);
-  }, [count]);
+    return () => clearInterval(interval)
+  }, [count])
 
   return (
     <div className={styles.Thankyoupage}>

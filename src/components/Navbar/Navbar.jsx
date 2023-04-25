@@ -1,4 +1,5 @@
 import { useGlobalContext } from '@/context';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,7 +10,26 @@ import styles from "./styles.module.scss"
 
 const Navbar = () => {
 
-    const { openMenu, setOpenMenu } = useGlobalContext()
+    const { user } = useGlobalContext()
+
+    const [openMenu, setOpenMenu] = useState(false)
+    const [openSubMenu, setOpenSubMenu] = useState(false)
+
+    useEffect(() => {
+      const handleOutsideClick = (event) => {
+        if (event.target.closest(`.${styles.Menu}`) === null) {
+          setOpenMenu(false);
+        }
+      };
+  
+      if (openMenu) {
+        document.body.addEventListener("click", handleOutsideClick);
+      }
+  
+      return () => {
+        document.body.removeEventListener("click", handleOutsideClick);
+      };
+    }, [openMenu]);
 
     const btnOpenMenu = () =>{
         setOpenMenu(true)
@@ -19,10 +39,18 @@ const Navbar = () => {
         setOpenMenu(false)
     }
 
+    const btnSubMenu = () => {
+      setOpenSubMenu(prev => !prev)
+    }
+
     const onHandleLogout = () => {
         localStorage.removeItem("email");
         localStorage.removeItem("password")
-        location.href="/login"
+        location.href="/"
+    }
+
+    const onHandleLogin = () => {
+      location.href="/login"
     }
 
   return (
@@ -39,19 +67,27 @@ const Navbar = () => {
           <div className={styles.containerLink_wishlist_cart}>
             <Link href={"/wishlist"}><BsHeartFill color="#242424" fill='#242424'/></Link>
             <Link href={"/cart"}><BsCartFill color="#242424" fill='#242424'/></Link>
+            <div className={styles.containerBtn}>
+              <button onClick={btnOpenMenu} className={!openMenu ? `${styles.btnOpenMenu} ${styles.show}` : `${styles.btnOpenMenu} ${styles.hidden}`}><AiOutlineMenu /></button>
+              <button onClick={btnClosenMenu} className={openMenu ? `${styles.btnClosenMenu} ${styles.show}` : `${styles.btnClosenMenu} ${styles.hidden}`}><AiFillCloseCircle /></button>
+            </div>
           </div>
           <ul className={openMenu ? `${styles.ulMenu} ${styles.show}` : `${styles.ulMenu} ${styles.hidden}`} role="menu">
             <li><Link href={"/"}>HOME</Link></li>
-            <li><Link href={"/products"}>PRODUCTS</Link></li>
+            <li onClick={btnSubMenu} className={styles.subMenu}>CATEGORIES</li>
+            <ul className={openSubMenu ? `${styles.show} ${styles.subUlMenu}` : `${styles.hidden}`}>
+              <li><Link href={"/electronics"}>Electronics</Link></li>
+              <li><Link href={"/jewelery"}>Jewelery</Link></li>
+              <li><Link href={"/men_clothing"}>Men's Clothing</Link></li>
+              <li><Link href={"/women_clorhing"}>Women's Clothing</Link></li>
+            </ul>
             <li><Link href={"/cart"}>CART</Link></li>
             <li><Link href={"/wishlist"}>WISHLIST</Link></li>
             <li><Link href={"/contact"}>CONTACT</Link></li>
-            <button onClick={onHandleLogout}>Logout</button>
+            {
+              user ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
+            }
           </ul>
-          <div className={styles.containerBtn}>
-            <button onClick={btnOpenMenu} className={!openMenu ? `${styles.btnOpenMenu} ${styles.show}` : `${styles.btnOpenMenu} ${styles.hidden}`}><AiOutlineMenu /></button>
-            <button onClick={btnClosenMenu} className={openMenu ? `${styles.btnClosenMenu} ${styles.show}` : `${styles.btnClosenMenu} ${styles.hidden}`}><AiFillCloseCircle /></button>
-          </div>
         </nav>
       </div>
     </section>

@@ -6,19 +6,19 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 
 import styles from "../../styles/Category.module.scss"
 
-const MenClothing = () => {
+const Jewelery = () => {
 
     const [category, setCategory] = useState()
 
     useEffect(() => {
-        fetch("https://fakestoreapi.com/products/category/men's clothing")
+        fetch("https://fakestoreapi.com/products/category/jewelery")
         .then(res => res.json())
         .then(data => setCategory(data))
     }, [])
 
   return (
     <section className={styles.Category}>
-        <h3>Men's Clothing</h3>
+        <h3>Jewelery</h3>
         <div className={styles.subContainerCategory}>
             <div className={styles.containerCategoryProduct}>
             {
@@ -35,4 +35,4 @@ const MenClothing = () => {
   )
 }
 
-export default MenClothing
+export default Jewelery

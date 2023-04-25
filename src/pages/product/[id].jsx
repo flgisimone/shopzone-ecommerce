@@ -1,23 +1,20 @@
-/**
- * This dynamic page shows the details of an individual product. 
- * The data is retrieved via API calls, using getStaticPath and getStaticProps to statically render the product data. 
- * 
- * The component shows the image, title, description, category, price, and a button to add or remove the product from favorites.
- */
-
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image'
 import Link from 'next/link';
 
-import { AiFillHeart, AiOutlineHeart, AiOutlineArrowLeft } from 'react-icons/ai';
-import { BsFillPeopleFill, BsStarFill, BsStarhalf, BsStar } from 'react-icons/bs';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { 
+  BsFillPeopleFill, BsStarFill, BsStarhalf, BsStar, 
+  BsCartCheckFill, BsCart, 
+  BsHeart, BsFillHeartFill } from 'react-icons/bs';
 
 import styles from "./styles.module.scss"
 
 const SingleProduct = ({productData}) => {
   
   const [favorite, setFavorite] = useState(false)
+  const [cart, setCart] = useState(false)
 
   useEffect(() => {
       const key = `FavoriteProduct: ${productData?.title}`
@@ -39,6 +36,27 @@ const SingleProduct = ({productData}) => {
         setFavorite(true);
       }
   }
+
+  useEffect(() => {
+    const key = `CartProduct: ${productData?.title}`
+    const value = localStorage.getItem(key)
+    if (value) {
+      setCart(true)
+    }
+  }, [productData?.title])
+
+  const onToggleCart = () => {
+    const key = `CartProduct: ${productData?.title}`
+    const value = localStorage.getItem(key)
+    if (value) {
+        localStorage.removeItem(key)
+        setCart(false)
+      } else {
+        const value = JSON.stringify(productData)
+        localStorage.setItem(key, value)
+        setCart(true)
+      }
+  }  
 
   const starCreator = (num) => {
     return Array.from({length: 5}, (_, index) => {
@@ -65,6 +83,10 @@ const SingleProduct = ({productData}) => {
         height={200}
         alt={productData?.title}/>
         <div className={styles.infoProduct}>
+          <div className={styles.infoCategory}>
+            <span>Category product: {productData?.category}</span>
+            <span>ID product: {productData?.id}</span>
+          </div>
           <h1>{productData?.title}</h1>
           <div className={styles.containerDescription}>
             <h4>Description</h4>
@@ -76,13 +98,14 @@ const SingleProduct = ({productData}) => {
           </div>
           <div className={styles.price_wishlist}>
             <span>{productData?.price + "$"}</span>
-            <button onClick={onToggleFavorite} >
-                {favorite ? <AiFillHeart /> : <AiOutlineHeart />}
-            </button>
-          </div>
-          <div className={styles.infoCategory}>
-            <span>Category product: {productData?.category}</span>
-            <span>ID product: {productData?.id}</span>
+            <div className={styles.containertn}>
+              <button onClick={onToggleCart} >
+                {cart ? <BsCartCheckFill /> : <BsCart />}
+              </button>
+              <button onClick={onToggleFavorite} >
+                {favorite ? <BsFillHeartFill /> : <BsHeart />}
+              </button>
+            </div>
           </div>
         </div>
       </div>

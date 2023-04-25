@@ -6,19 +6,19 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 
 import styles from "../../styles/Category.module.scss"
 
-const MenClothing = () => {
+const WomenClothing = () => {
 
     const [category, setCategory] = useState()
 
     useEffect(() => {
-        fetch("https://fakestoreapi.com/products/category/men's clothing")
+        fetch("https://fakestoreapi.com/products/category/women's clothing")
         .then(res => res.json())
         .then(data => setCategory(data))
     }, [])
 
   return (
     <section className={styles.Category}>
-        <h3>Men's Clothing</h3>
+        <h3>Women's Clothing</h3>
         <div className={styles.subContainerCategory}>
             <div className={styles.containerCategoryProduct}>
             {
@@ -30,9 +30,9 @@ const MenClothing = () => {
             }              
             </div>
             <Link href={"/products"} className={styles.goToPage}><BsFillArrowRightCircleFill /></Link>   
-        </div>       
+        </div>   
     </section>
   )
 }
 
-export default MenClothing
+export default WomenClothing

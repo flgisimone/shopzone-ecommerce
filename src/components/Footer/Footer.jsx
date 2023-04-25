@@ -1,10 +1,4 @@
-/**
- * In this component there are four columns containing the website logo, logout button, contact information, resources and a sitemap. 
- 
- * When the logout button is clicked, the authentication information (email and password) is removed from the localStorage and the user is redirected to the login page.
- */
-
-import React from 'react'
+import { useGlobalContext } from '@/context';
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -12,10 +6,16 @@ import styles from "./styles.module.scss"
 
 const Footer = () => {
 
+    const { user } = useGlobalContext()
+
     const onHandleLogout = () => {
         localStorage.removeItem("email");
         localStorage.removeItem("password")
-        location.href="/login"
+        location.href="/"
+    }
+
+    const onHandleLogin = () => {
+      location.href="/login"
     }
 
   return (
@@ -29,7 +29,9 @@ const Footer = () => {
                     height={100}
                     alt={"logo"} />
                 </Link>
-                <button onClick={onHandleLogout}>Logout</button>                
+                {
+                    user ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
+                }            
             </div>
             <div className={styles.column_2}>
                 <ul>

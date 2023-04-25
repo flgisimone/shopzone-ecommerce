@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import Product from "../Product/Product";
-import { RxDropdownMenu } from 'react-icons/rx';
+
+import TopProducts from "../TopProducts/TopProducts";
+import Electronics from "../Electronics/Electronics";
+import Jewelery from "../Jewelery/Jewelery";
+import MenClothing from "../MenClothing/MenClothing";
+import WomenClothing from "../WomenClothing/WomenClothing";
 
 import styles from "./styles.module.scss"
 
 const CategoryList = () => {
 
   const [dataCategory, setDataCategory] = useState([])
-  const [dataProducts, setDataProducts] = useState([])
-  const [showProduct, setShowProducts] = useState(4)
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products/categories")
@@ -17,50 +19,28 @@ const CategoryList = () => {
     .then(data => setDataCategory(data))
   }, [])
 
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-    .then(res => res.json())
-    .then(data => setDataProducts(data))
-  }, [])
 
-  const onHandleShow = () => {
-    setShowProducts(prev => prev + 4)
-  }
 
 return (
   <section className={styles.CategoryList}>
+    <h2>Category</h2>
     <div className={styles.containerCategory}>
       {
-        dataCategory.map((categoryItem, index) => <Link href={"/"} key={index}>{categoryItem}</Link>)
+        dataCategory.map((categoryItem, index) => <Link href={"/"} className={styles.pageCategory} key={index}>{categoryItem}</Link>)
       }
+      <TopProducts />
     </div>
-    <div className={styles.allProducts}>
-      <h2>All Products</h2>
-      <div className={styles.containerProducts}>
-        {
-          dataProducts
-          .slice(0, showProduct)
-          .map(product => 
-            <div className={styles.Product} key={product.id}>
-              <Product data={product} />
-            </div>
-            )
-          }
-      </div>
-      <div className={styles.containerShowProducts}>
-        {
-          showProduct != dataProducts.length ? 
-          (
-            <button className={styles.btnShowProducts} onClick={onHandleShow}>
-              <RxDropdownMenu className={styles.iconShowProducts}/>
-              Show other Products
-            </button>
-          ) :
-          ( 
-            <span className={styles.notProducts}> No other Products </span> 
-          )
-        }
-      </div>
+    <div className={styles.electronics}>
+      <Electronics />
+    </div>
+    <div className={styles.jewelery}>
+      <Jewelery />
+    </div>
+    <div className={styles.menClothing}>
+      <MenClothing />
+    </div>
+    <div className={styles.menClothing}>
+      <WomenClothing />
     </div>
   </section>
 )

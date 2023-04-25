@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useGlobalContext } from "@/context"
 
 import Signup from "@/components/Signup/Signup"
@@ -16,6 +16,8 @@ const Login = () => {
     activeForm, setActiveForm,
     invalidLogin, setInvalidLogin
   } = useGlobalContext()
+
+  const [count, setCount] = useState(3);
 
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/users")
@@ -39,7 +41,6 @@ const Login = () => {
 
   const onHandleShowLogin = () => {
     setActiveForm(true)
-    window.location.href = "/login";
   }
 
   const onFormSubmit = (e) => {
@@ -56,12 +57,13 @@ const Login = () => {
               localStorage.setItem("email", JSON.stringify({ email: loginState.email, emailUser: user.email }))
               localStorage.setItem("password", JSON.stringify({ password: loginState.password, passwordUser: user.password }))
               userFound = true
-              window.location.href = "/";
+              window.location.href = "/checkout";
             } 
         })
         if (!userFound) {
-          setInvalidLogin("Email/Password not valid!");
+          setInvalidLogin("Email/Password not valid! Try again.")
           setLoginState({ email: "", password: "" })
+          location.reload()
         }
     }
   }
@@ -76,6 +78,7 @@ const Login = () => {
     </Head>
     <section className={styles.Login}>
       <div className={styles.containerLogin}>
+        <span>Login or Register</span>
         <div className={styles.chooseForm}>
           <button className={!activeForm ? `` : `${styles.active}`} onClick={onHandleShowLogin}>Login</button>
           <button className={!activeForm ? `${styles.active}` : ``} onClick={onHandleShowSignUp}>Sign Up</button>

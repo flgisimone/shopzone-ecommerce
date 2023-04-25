@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from "next/link"
 
-import { useGlobalContext } from '@/context';
-
 import { 
   BsFillPeopleFill, BsStarFill, BsStarhalf, BsStar, 
   BsCart, BsCartCheckFill, 
@@ -15,7 +13,6 @@ const Product = ({data}) => {
 
     const [favorite, setFavorite] = useState(false)
     const [cart, setCart] = useState(false)
-    const [cartProduct, setCartProduct] = useState([])
 
     const starCreator = (num) => {
       return Array.from({length: 5}, (_, index) => {
@@ -110,10 +107,10 @@ const Product = ({data}) => {
         <span>{data?.price + "$"}</span>
         <div className={styles.containertn}>
           <button onClick={onToggleCart} >
-              {cart ? <BsCartCheckFill /> : <BsCart />}
+            {cart ? <BsCartCheckFill /> : <BsCart />}
           </button>
           <button onClick={onToggleFavorite} >
-              {favorite ? <BsFillHeartFill /> : <BsHeart />}
+            {favorite ? <BsFillHeartFill /> : <BsHeart />}
           </button>
         </div>
       </div>

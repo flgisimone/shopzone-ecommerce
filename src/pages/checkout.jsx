@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import emailjs from '@emailjs/browser';
 
+import Login from './login';
 import Loader from '@/components/Loader/Loader';
 
 import { useGlobalContext } from '@/context';
@@ -10,7 +11,9 @@ import styles from "../styles/Checkout.module.scss"
 
 const Checkout = () => {
 
-  const { isLoading, setIsLoading } = useGlobalContext()
+  const { 
+    isLoading, setIsLoading,
+    user, setUser } = useGlobalContext()
   
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
@@ -31,6 +34,14 @@ const Checkout = () => {
   }
 
   useEffect(() => {
+    if (localStorage.getItem("email") && localStorage.getItem("password")) {
+      setUser(JSON.parse(localStorage.getItem("email")).email);
+      setUser(JSON.parse(localStorage.getItem("password")).password);
+    }
+    setIsLoading(false)
+  }, []); 
+
+  useEffect(() => {
     const emailMessage = []
     for(const key in localStorage){
       if(key.startsWith("email")){
@@ -38,7 +49,7 @@ const Checkout = () => {
         emailMessage.push(email)
       }
     }
-    setEmail(emailMessage[0].email)
+    setEmail(emailMessage[0]?.email)
   }, [])
 
   useEffect(() => {
@@ -97,144 +108,147 @@ const Checkout = () => {
   }  
 
   return (
+    user ? 
     <section className={styles.Checkout}>
-      <h1>Checkout Order {idOrder}</h1>
-      <h2>Total Order: {totalPayment}$</h2>
-      <div className={styles.cartSummary}>
-        <h3>Summary Order</h3>
-        <div className={styles.containerCartSummary}>
-          {
-            orderCart.map(prod => 
-              <div className={styles.prodSummary} key={prod.id}>
-                <div className={styles.product}>
-                  <Image
-                  src={prod.image}
-                  width={50}
-                  height={50}
-                  alt={prod.title}
-                  />
-                  <div className={styles.qty_price}>
-                    <span className={styles.title}>{prod.title}</span>
-                    {
-                      prod.quantity > 1 ? 
-                      <span className={styles.qtyPrice}>{"Qty. " + prod.quantity} x {prod.price}$</span> 
-                      : 
-                      <span className={styles.qtyPrice}>{"Qty. 1 x" + prod.price}$</span>
-                    }
-                  </div>
+    <h1>Checkout Order {idOrder}</h1>
+    <h2>Total Order: {totalPayment}$</h2>
+    <div className={styles.cartSummary}>
+      <h3>Summary Order</h3>
+      <div className={styles.containerCartSummary}>
+        {
+          orderCart.map(prod => 
+            <div className={styles.prodSummary} key={prod.id}>
+              <div className={styles.product}>
+                <Image
+                src={prod.image}
+                width={50}
+                height={50}
+                alt={prod.title}
+                />
+                <div className={styles.qty_price}>
+                  <span className={styles.title}>{prod.title}</span>
+                  {
+                    prod.quantity > 1 ? 
+                    <span className={styles.qtyPrice}>{"Qty. " + prod.quantity} x {prod.price}$</span> 
+                    : 
+                    <span className={styles.qtyPrice}>{"Qty. 1 x" + prod.price}$</span>
+                  }
                 </div>
               </div>
-              )
-          }
-        </div>
+            </div>
+            )
+        }
       </div>
-      <hr className={styles.separated}/>
-      <form ref={form} onSubmit={onHandlePaymentComplete}>
-      <input type="hidden" name="emailCustomer" value={templateParams.email}/>
-      <input type="hidden" name="idOrder" value={templateParams.idOrder}/>
-      <input type="hidden" name="totalPayment" value={templateParams.totalPayment}/>
-      <input type="hidden" name="orderCart" value={templateParams.orderCart}/>
-      <fieldset className={styles.fieldsetCard}>
-          <legend className={styles.legendCardName}>
-            Choose Payment Method
-          </legend>
-          <div className={styles.typePayment}>
-            <input type="radio" name="paymentMethod" value="Mastercard" onChange={onHandlePaymentMethod}/>
-            <div className={styles.containerCard}>
-              <Image
-              src={"https://img.icons8.com/color/256/mastercard.png"}
-              width={100}
-              height={100}
-              alt={"mastercard payment"} 
-              />
-              <span>Mastercard Payment</span>
-            </div>
+    </div>
+    <hr className={styles.separated}/>
+    <form ref={form} onSubmit={onHandlePaymentComplete}>
+    <input type="hidden" name="emailCustomer" value={templateParams.email}/>
+    <input type="hidden" name="idOrder" value={templateParams.idOrder}/>
+    <input type="hidden" name="totalPayment" value={templateParams.totalPayment}/>
+    <input type="hidden" name="orderCart" value={templateParams.orderCart}/>
+    <fieldset className={styles.fieldsetCard}>
+        <legend className={styles.legendCardName}>
+          Choose Payment Method
+        </legend>
+        <div className={styles.typePayment}>
+          <input type="radio" name="paymentMethod" value="Mastercard" onChange={onHandlePaymentMethod}/>
+          <div className={styles.containerCard}>
+            <Image
+            src={"https://img.icons8.com/color/256/mastercard.png"}
+            width={100}
+            height={100}
+            alt={"mastercard payment"} 
+            />
+            <span>Mastercard Payment</span>
           </div>
-          <div className={styles.typePayment}>
-            <input type="radio" name="paymentMethod" value="Paypal" onChange={onHandlePaymentMethod}/>
-            <div className={styles.containerCard}>
-              <Image
-              src={"https://img.icons8.com/color/512/paypal.png"}
-              width={100}
-              height={100}
-              alt={"paypal payment"} 
-              />
-              <span>Paypal Payment</span>
-            </div>
+        </div>
+        <div className={styles.typePayment}>
+          <input type="radio" name="paymentMethod" value="Paypal" onChange={onHandlePaymentMethod}/>
+          <div className={styles.containerCard}>
+            <Image
+            src={"https://img.icons8.com/color/512/paypal.png"}
+            width={100}
+            height={100}
+            alt={"paypal payment"} 
+            />
+            <span>Paypal Payment</span>
           </div>
-          <div className={styles.typePayment}>
-            <input type="radio" name="paymentMethod" value="Bank Transfer" onChange={onHandlePaymentMethod}/>
-            <div className={styles.containerCard}>
-              <Image
-              src={"https://img.icons8.com/color/256/merchant-account.png"}
-              width={100}
-              height={100}
-              alt={"bank transfer payment"} 
-              />
-              <span>Bank Transfer Payment</span>
-            </div>
+        </div>
+        <div className={styles.typePayment}>
+          <input type="radio" name="paymentMethod" value="Bank Transfer" onChange={onHandlePaymentMethod}/>
+          <div className={styles.containerCard}>
+            <Image
+            src={"https://img.icons8.com/color/256/merchant-account.png"}
+            width={100}
+            height={100}
+            alt={"bank transfer payment"} 
+            />
+            <span>Bank Transfer Payment</span>
           </div>
-          <div className={styles.typePayment}>
-            <input type="radio" name="paymentMethod" value="Mark Payment" onChange={onHandlePaymentMethod}/>
-            <div className={styles.containerCard}>
-              <Image
-              src={"https://img.icons8.com/color/256/wallet--v1.png"}
-              width={100}
-              height={100}
-              alt={"Mark payment"} 
-              />
-              <span>Mark Payment</span>
-            </div>
+        </div>
+        <div className={styles.typePayment}>
+          <input type="radio" name="paymentMethod" value="Mark Payment" onChange={onHandlePaymentMethod}/>
+          <div className={styles.containerCard}>
+            <Image
+            src={"https://img.icons8.com/color/256/wallet--v1.png"}
+            width={100}
+            height={100}
+            alt={"Mark payment"} 
+            />
+            <span>Mark Payment</span>
           </div>
-        </fieldset>
-        <fieldset className={styles.fieldsetSpecifications}>
-          <legend className={styles.legendSpecifications}>
-            Payment Data
-          </legend>
-          <div className={styles.dataPayments}>
+        </div>
+      </fieldset>
+      <fieldset className={styles.fieldsetSpecifications}>
+        <legend className={styles.legendSpecifications}>
+          Payment Data
+        </legend>
+        <div className={styles.dataPayments}>
 
-            <input type="text" 
-            className={styles.accountholder} 
-            name="name_surname" 
-            id="name_surname" 
-            placeholder="Name and Surname" 
-            value={name} 
-            onChange={onHandleName}
+          <input type="text" 
+          className={styles.accountholder} 
+          name="name_surname" 
+          id="name_surname" 
+          placeholder="Name and Surname" 
+          value={name} 
+          onChange={onHandleName}
+          required autoComplete='off'/>
+
+          <input type="text"
+          className={styles.numberCard} 
+          placeholder="Card Number" 
+          value={number} 
+          onChange={onHandleNumber} 
+          minLength={16} maxLength={16}
+          pattern="[0-9]+"
+          title="Solo number is accepted."
+          required 
+          autoComplete='off'/>
+
+          <div className={styles.expiryDate}>
+            <span>Expiry</span>
+            <input type="month" 
+            min="" value={expiry} 
+            onChange={onHandleExpiry} 
             required autoComplete='off'/>
-
             <input type="text"
-            className={styles.numberCard} 
-            placeholder="Card Number" 
-            value={number} 
-            onChange={onHandleNumber} 
-            minLength={16} maxLength={16}
+            className={styles.cvc} 
+            value={cvc} 
+            placeholder="CVC" 
             pattern="[0-9]+"
             title="Solo number is accepted."
-            required 
-            autoComplete='off'/>
-
-            <div className={styles.expiryDate}>
-              <span>Expiry</span>
-              <input type="month" 
-              min="" value={expiry} 
-              onChange={onHandleExpiry} 
-              required autoComplete='off'/>
-              <input type="text"
-              className={styles.cvc} 
-              value={cvc} 
-              placeholder="CVC" 
-              pattern="[0-9]+"
-              title="Solo number is accepted."
-              onChange={onHandleCvc}            
-              minLength={3} maxLength={3}
-              required autoComplete='off'/>              
-            </div>
+            onChange={onHandleCvc}            
+            minLength={3} maxLength={3}
+            required autoComplete='off'/>              
           </div>
-        </fieldset>
-        {isLoading ? <Loader /> : 
-        <input type="submit" value="Complete Order"/>}
-      </form>
-    </section>
+        </div>
+      </fieldset>
+      {isLoading ? <Loader /> : 
+      <input type="submit" value="Complete Order"/>}
+    </form>
+  </section>
+  :
+  <Login />
   )
 }
 

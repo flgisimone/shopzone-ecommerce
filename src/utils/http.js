@@ -1,15 +1,4 @@
-/**
- * API: "https://api.escuelajs.co/api/v1"
- 
- * This code defines an asynchronous POST function that sends a POST request to an API at the URL with the parameters: 
- * - name
- * - email
- * - password
- 
- * The POST request contains a JSON body that includes a randomly generated ID, name, role, email, password, and an avatar URL.
- */
-
-const url = "https://api.escuelajs.co/api/v1";
+const url = "https://api.escuelajs.co/api/v1"
 
   const POST = async (res, name, email, password) => {
 

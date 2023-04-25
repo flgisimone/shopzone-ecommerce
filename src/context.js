@@ -4,6 +4,7 @@ const AppContext = React.createContext()
 
 const AppProvider = ({children}) => {
 
+    const [user, setUser] = useState()
     const [showProduct, setShowProduct] = useState(4)
     const [isLoading, setIsLoading] = useState(false)
     const [favorites, setFavorites] = useState([])
@@ -21,7 +22,6 @@ const AppProvider = ({children}) => {
     const [invalidLogin, setInvalidLogin] = useState("")
     const [name, setName] = useState("")
     const [userPost, setUserPost] = useState()
-    const [openMenu, setOpenMenu] = useState(false)
     const [data, setData] = useState()
     const [cart, setCart] = useState([])
     const [cartProduct, setCartProduct] = useState([])
@@ -29,6 +29,7 @@ const AppProvider = ({children}) => {
     return(
         <AppContext.Provider value ={
             {
+                user, setUser,
                 showProduct, setShowProduct,
                 isLoading, setIsLoading,
                 favorites, setFavorites,
@@ -46,7 +47,6 @@ const AppProvider = ({children}) => {
                 invalidLogin, setInvalidLogin,
                 name, setName,
                 userPost, setUserPost,
-                openMenu, setOpenMenu,
                 data, setData,
                 cart, setCart,
                 cartProduct, setCartProduct

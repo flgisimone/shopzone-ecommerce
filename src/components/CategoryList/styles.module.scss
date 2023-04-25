@@ -10,8 +10,9 @@
         justify-content: space-between;
         font-size: 1.25rem;
         gap: .5rem;
+        justify-content: center;
 
-        a{
+        .pageCategory{
             width: 10rem;
             text-decoration: none;
             text-transform: capitalize;
@@ -19,48 +20,9 @@
             text-align: center;
             padding: .5rem;
             font-size: 1rem;
-            align-self: center;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-    }
-
-    .containerProducts{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: .5rem;
-
-        .Product{
-            width: 10rem;
-        }
-    }
-
-    .containerShowProducts{
-        display: flex;
-        justify-content: center;
-        
-        .btnShowProducts{
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-            font-size: 1rem;
-            background-color: transparent;
-            border: none;
-            margin: 1rem 0;
-            
-            .iconShowProducts{
-                font-size: 1.45rem;
-            }
-        }
-        
-        .notProducts{
-            margin: 1rem 0;
-            color: #FF7A00;
-            font-weight: 600;
-            font-size: 1rem;
         }
     }
 }

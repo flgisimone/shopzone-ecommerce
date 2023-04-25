@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import Hero from '@/components/Hero/Hero'
 import CategoryList from '@/components/CategoryList/CategoryList'
+import TopProducts from '@/components/TopProducts/TopProducts'
 
 import styles from '@/styles/Home.module.scss'
 
@@ -29,7 +30,9 @@ export default function Home() {
             </div>          
           </Link>
         </section>
-        <CategoryList />
+        <section className={styles.categoriesHome}>
+          <CategoryList />
+        </section>
         <section className={styles.bottomHero}>
           <h2>Lorem ipsum dolor sit amet</h2>
         </section>
