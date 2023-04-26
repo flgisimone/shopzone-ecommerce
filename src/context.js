@@ -5,6 +5,7 @@ const AppContext = React.createContext()
 const AppProvider = ({children}) => {
 
     const [user, setUser] = useState()
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [showProduct, setShowProduct] = useState(5)
     const [isLoading, setIsLoading] = useState(false)
     const [favorites, setFavorites] = useState([])
@@ -30,6 +31,7 @@ const AppProvider = ({children}) => {
         <AppContext.Provider value ={
             {
                 user, setUser,
+                isAuthenticated, setIsAuthenticated,
                 showProduct, setShowProduct,
                 isLoading, setIsLoading,
                 favorites, setFavorites,

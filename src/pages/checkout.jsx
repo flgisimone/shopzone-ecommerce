@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import emailjs from '@emailjs/browser';
-
+import { auth } from '@/firebase'
+import { useAuthState } from "react-firebase-hooks/auth";
 import Login from './login';
 import Loader from '@/components/Loader/Loader';
 
@@ -14,7 +15,10 @@ const Checkout = () => {
   const { 
     isLoading, setIsLoading,
     user, setUser } = useGlobalContext()
-  
+
+    const [userGoogle, loading] = useAuthState(auth)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
   const [expiry, setExpiry] = useState("")
@@ -34,13 +38,18 @@ const Checkout = () => {
   }
 
   useEffect(() => {
+    if (userGoogle) setIsAuthenticated(true)
+  }, [userGoogle])
+
+
+  useEffect(() => {
     if (localStorage.getItem("email") && localStorage.getItem("password")) {
       setUser(JSON.parse(localStorage.getItem("email")).email);
       setUser(JSON.parse(localStorage.getItem("password")).password);
     }
     setIsLoading(false)
   }, []); 
-
+  
   useEffect(() => {
     const emailMessage = []
     for(const key in localStorage){
@@ -83,6 +92,8 @@ const Checkout = () => {
     }
   }, [])
 
+  const form = useRef()
+
   const onHandlePaymentComplete = (e) => {
     e.preventDefault();
     for(const key in localStorage){
@@ -97,18 +108,20 @@ const Checkout = () => {
           window.location.href = "/thankyoupage"
       }, 1000);
 
-  const form = useRef()
-
     emailjs.sendForm('service_afp03sz', 'template_j8gbpuf', form.current, 'vvSqsU-fF1YN9n3dg')
     .then((result) => {
         console.log(result.text)
     }, (error) => {
         console.log(error.text)
     })
-  }  
+  }
+  
+  if (loading) {
+    return <Loader />
+  }
 
   return (
-    user ? 
+    user || isAuthenticated ? 
     <section className={styles.Checkout}>
     <h1>Checkout Order {idOrder}</h1>
     <h2>Total Order: {totalPayment}$</h2>
@@ -131,7 +144,7 @@ const Checkout = () => {
                     prod.quantity > 1 ? 
                     <span className={styles.qtyPrice}>{"Qty. " + prod.quantity} x {prod.price}$</span> 
                     : 
-                    <span className={styles.qtyPrice}>{"Qty. 1 x" + prod.price}$</span>
+                    <span className={styles.qtyPrice}>{"Qty. 1 x " + prod.price}$</span>
                   }
                 </div>
               </div>

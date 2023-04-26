@@ -4,10 +4,14 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { 
-  BsFillPeopleFill, BsStarFill, BsStarhalf, BsStar, 
+
+import { BsFillPeopleFill,
   BsCartCheckFill, BsCart, 
   BsHeart, BsFillHeartFill } from 'react-icons/bs';
+
+  import {
+    RiStarFill, RiStarHalfFill, RiStarLine
+  } from 'react-icons/ri'
 
 import styles from "./styles.module.scss"
 
@@ -60,9 +64,9 @@ const SingleProduct = ({productData}) => {
 
   const starCreator = (num) => {
     return Array.from({length: 5}, (_, index) => {
-      if(num >= index + 1) return <BsStarFill key={index} className={styles.star} fill="#fca903"/>
-      if (num >= index + 0.5) return <BsStarhalf key={index} className={styles.star} fill="#fca903"/>
-      return <BsStar key={index} className={styles.star} fill="#fca903"/>
+      if(num >= index + 1) return <RiStarFill key={index} className={styles.star} fill="#fca903"/>
+      if (num >= index + 0.5) return <RiStarHalfFill key={index} className={styles.star} fill="#fca903"/>
+      return <RiStarLine key={index} className={styles.star} fill="#fca903"/>
     })
   }
 
@@ -78,7 +82,7 @@ const SingleProduct = ({productData}) => {
       <Link href={"/products"}><AiOutlineArrowLeft/></Link>
       <div className={styles.containerProduct}>
         <Image 
-        src={productData.image?.includes("https://") ? productData?.image : "https://i.postimg.cc/9XNt59Zb/Image-not-available.png"}
+        src={productData?.image?.includes("https://") ? productData?.image : "https://i.postimg.cc/9XNt59Zb/Image-not-available.png"}
         width={400}
         height={200}
         alt={productData?.title}/>

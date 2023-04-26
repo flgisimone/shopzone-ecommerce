@@ -1,6 +1,9 @@
 import Head from "next/head"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useGlobalContext } from "@/context"
+import { auth } from "@/firebase";
+import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import GoogleButton from 'react-google-button'
 
 import Signup from "@/components/Signup/Signup"
 
@@ -16,6 +19,11 @@ const Login = () => {
     activeForm, setActiveForm,
     invalidLogin, setInvalidLogin
   } = useGlobalContext()
+
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithRedirect(auth, provider);
+  }
 
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/users")
@@ -52,6 +60,7 @@ const Login = () => {
                 user.password === loginState.password &&
                 user.password === password
             ) {
+              localStorage.setItem("user", JSON.stringify({ user }))
               localStorage.setItem("email", JSON.stringify({ email: loginState.email, emailUser: user.email }))
               localStorage.setItem("password", JSON.stringify({ password: loginState.password, passwordUser: user.password }))
               userFound = true
@@ -90,6 +99,7 @@ const Login = () => {
               {invalidLogin && <p className={styles.invalidLogin}>{invalidLogin}</p>}
               <input type="submit" value="Login" />
             </form>
+            <GoogleButton onClick={googleSignIn} />
           </div>
           <div className={!activeForm ? `${styles.formSignUp} ${styles.show} ${styles.show}` : `${styles.formSignUp} ${styles.hidden}`}>
             <Signup />

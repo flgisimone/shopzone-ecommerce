@@ -3,9 +3,13 @@ import Image from 'next/image'
 import Link from "next/link"
 
 import { 
-  BsFillPeopleFill, BsStarFill, BsStarhalf, BsStar, 
+  BsFillPeopleFill,
   BsCart, BsCartCheckFill, 
   BsHeart, BsFillHeartFill } from 'react-icons/bs';
+
+  import {
+    RiStarFill, RiStarHalfFill, RiStarLine
+  } from 'react-icons/ri'
 
 import styles from "./styles.module.scss"
 
@@ -16,9 +20,9 @@ const Product = ({data}) => {
 
     const starCreator = (num) => {
       return Array.from({length: 5}, (_, index) => {
-        if(num >= index + 1) return <BsStarFill key={index} className={styles.star} fill="#fca903"/>
-        if (num >= index + 0.5) return <BsStarhalf key={index} className={styles.star} fill="#fca903"/>
-        return <BsStar key={index} className={styles.star} fill="#fca903"/>
+        if(num >= index + 1) return <RiStarFill key={index} className={styles.star} fill="#fca903"/>
+        if (num >= index + 0.5) return <RiStarHalfFill key={index} className={styles.star} fill="#fca903"/>
+        return <RiStarLine key={index} className={styles.star} fill="#fca903"/>
       })
     }
 

@@ -1,6 +1,9 @@
 import { useGlobalContext } from '@/context';
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { auth } from '@/firebase';
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import styles from "./styles.module.scss"
 
@@ -8,10 +11,17 @@ const Footer = () => {
 
     const { user } = useGlobalContext()
 
+    const [userGoogle] = useAuthState(auth)
+
     const onHandleLogout = () => {
         localStorage.removeItem("email");
         localStorage.removeItem("password")
         location.href="/"
+
+        auth.signOut().then(() => {
+            router.push("/");
+          });
+          location.reload()
     }
 
     const onHandleLogin = () => {
@@ -30,7 +40,7 @@ const Footer = () => {
                     alt={"logo"} />
                 </Link>
                 {
-                    user ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
+                    user || userGoogle ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
                 }            
             </div>
             <div className={styles.column_2}>

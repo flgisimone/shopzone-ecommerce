@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 
-import Product from "../Product/Product"
+import SliderProduct from "../SliderProduct/SliderProduct";
 
-import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill, BsCircle, BsCircleFill } from 'react-icons/bs';
+import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs';
 
 import styles from "./styles.module.scss"
 
@@ -20,7 +20,7 @@ const TopProducts = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setSlide(slide => (slide + 1) % 5)
-    }, 3_000)
+    }, 3_500)
     return () => clearInterval(interval)
   }, [])
 
@@ -42,7 +42,7 @@ const TopProducts = () => {
           .map(products => 
             <div className={styles.topProduct} key={products.id}>
               <button className={styles.btnPrev} onClick={prevSlide}><BsFillArrowLeftCircleFill /></button>
-              <Product data={products} />
+              <SliderProduct data={products} />
               <button className={styles.btnNext} onClick={nextSlide}><BsFillArrowRightCircleFill /></button>
             </div>
             )

@@ -13,7 +13,7 @@ import {
 
 import styles from "./styles.module.scss"
 
-const FavoriteProduct = ({data}) => {
+const SliderProduct = ({data}) => {
 
     const [favorite, setFavorite] = useState(false)
     const [cart, setCart] = useState(false)
@@ -46,7 +46,6 @@ const FavoriteProduct = ({data}) => {
             localStorage.setItem(key, value)
             setFavorite(true)
           }
-          location.reload()
     }
     //--------------------------------
 
@@ -70,7 +69,6 @@ const FavoriteProduct = ({data}) => {
           localStorage.setItem(key, value)
           setCart(true)
         }
-        location.reload()
     }  
     //--------------------------------
 
@@ -86,42 +84,44 @@ const FavoriteProduct = ({data}) => {
           height={480}
           alt={data?.title}/>
       </Link>
-      <div className={styles.infoProduct}>
-        <Link 
-          href={`/product/${data.id}`}
-          as={`/product/${data.id}`}
-        >
-          <h2 title={data?.title}>{data?.title}</h2>
+      <div className={styles.containerInfoProduct}>
+        <div className={styles.infoProduct}>
+          <Link 
+            href={`/product/${data.id}`}
+            as={`/product/${data.id}`}
+          >
+            <h2 title={data?.title}>{data?.title}</h2>
+          </Link>
+          <Link 
+            href={`/product/${data.id}`}
+            as={`/product/${data.id}`}
+          >
+            <p title={data?.description}>{data?.description}</p>
+          </Link>
+        </div>
+        <Link href="/" className={styles.categoryProduct}>Category 
+          <span>
+            {data?.category}
+          </span>
         </Link>
-        <Link 
-          href={`/product/${data.id}`}
-          as={`/product/${data.id}`}
-        >
-          <p title={data?.description}>{data?.description}</p>
-        </Link>
-      </div>
-      <Link href="/" className={styles.categoryProduct}>Category 
-        <span>
-          {data?.category}
-        </span>
-      </Link>
-      <div className={styles.rating}>
-        <span className={styles.rate}>{starCreator(Math.round(data?.rating?.rate))}</span>
-        <span className={styles.count}><BsFillPeopleFill />{data?.rating?.count}</span>
-      </div>
-      <div className={styles.actionProduct}>
-        <span>{data?.price + "$"}</span>
-        <div className={styles.containertn}>
-          <button onClick={onToggleCart} >
-            {cart ? <BsCartCheckFill /> : <BsCart />}
-          </button>
-          <button onClick={onToggleFavorite} >
-            {favorite ? <BsFillHeartFill /> : <BsHeart />}
-          </button>
+        <div className={styles.rating}>
+          <span className={styles.rate}>{starCreator(Math.round(data?.rating?.rate))}</span>
+          <span className={styles.count}><BsFillPeopleFill />{data?.rating?.count}</span>
+        </div>
+        <div className={styles.actionProduct}>
+          <span>{data?.price + "$"}</span>
+          <div className={styles.containertn}>
+            <button onClick={onToggleCart} >
+              {cart ? <BsCartCheckFill /> : <BsCart />}
+            </button>
+            <button onClick={onToggleFavorite} >
+              {favorite ? <BsFillHeartFill /> : <BsHeart />}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-export default FavoriteProduct
+export default SliderProduct

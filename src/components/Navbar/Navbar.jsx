@@ -2,19 +2,29 @@ import { useGlobalContext } from '@/context';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { useRouter } from 'next/router'
+import { auth } from '@/firebase';
+import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineMenu, AiFillCloseCircle } from 'react-icons/ai';
 import { BsHeartFill, BsCartFill } from 'react-icons/bs';
-import { CiMenuKebab } from 'react-icons/ci';
 
 import styles from "./styles.module.scss"
 
 const Navbar = () => {
 
+  const router = useRouter()
+
     const { user } = useGlobalContext()
 
+    const [userGoogle] = useAuthState(auth)
     const [openMenu, setOpenMenu] = useState(false)
     const [openSubMenu, setOpenSubMenu] = useState(false)
+    const [userLogged, setUserLogged] = useState([])
+
+    useEffect(() => {
+      const userLogged = JSON.parse(localStorage.getItem("user"))
+      if(userLogged) setUserLogged(userLogged)
+    }, [])
 
     useEffect(() => {
       const handleOutsideClick = (event) => {
@@ -45,9 +55,14 @@ const Navbar = () => {
     }
 
     const onHandleLogout = () => {
-        localStorage.removeItem("email");
+        localStorage.removeItem("email")
         localStorage.removeItem("password")
         location.href="/"
+
+        auth.signOut().then(() => {
+          router.push("/");
+        });
+        location.reload()
     }
 
     const onHandleLogin = () => {
@@ -55,15 +70,25 @@ const Navbar = () => {
     }
 
   return (
-    <section className={styles.Menu}>
+    <section className={styles.Menu} >
       <div className={styles.ContainerMenu}>
-        <Link href={"/"}>
-          <Image
-          src={"https://i.postimg.cc/ZqLZgBPy/logoipsum-248.png"}
-          width={244}
-          height={100}
-          alt={"logo"} />
-        </Link>
+        <div className={styles.logo_user}>
+          <Link href={"/"} onClick={btnClosenMenu}>
+            <Image
+            src={"https://i.postimg.cc/ZqLZgBPy/logoipsum-248.png"}
+            width={244}
+            height={100}
+            alt={"logo"} />
+          </Link>
+          <div className={styles.userLogged}>
+            <Image
+            src={userLogged?.user?.avatar}
+            width={50}
+            height={50}
+            alt={"logo"} />
+            <span>Hi, {userLogged?.user?.name}</span>
+          </div>
+        </div>
         <nav>
           <div className={styles.containerLink_wishlist_cart}>
             <Link href={"/wishlist"} onClick={btnClosenMenu}><BsHeartFill color="#242424" fill='#242424'/></Link>
@@ -86,7 +111,7 @@ const Navbar = () => {
             <li onClick={btnClosenMenu}><Link href={"/wishlist"}>WISHLIST</Link></li>
             <li onClick={btnClosenMenu}><Link href={"/contact"}>CONTACT</Link></li>
             {
-              user ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
+              user || userGoogle ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
             }
           </ul>
         </nav>
