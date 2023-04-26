@@ -1,21 +1,7 @@
-/**
- * The page contains a form where the user can enter their first name, last name, email, request option, message, and agree to the terms of use and privacy policy.
- * When the user submits the form, the data is saved in an object called moduleContact using the localStorage.
- 
- * The page uses the useGlobalContext hook to manage the global state of the application.
- * When the user submits the form, the state is updated using the functions: 
- * setFirstName; 
- * setLastName;
- * setOptionValue; 
- * setEmail; 
- * setMessage; 
- * setPrivacy; 
- * setModuleContact;
- */
-
 import Head from 'next/head';
-import React from 'react'
+import { useRef } from 'react'
 import { useGlobalContext } from '@/context';
+import emailjs from '@emailjs/browser';
 
 import Image from 'next/image'
 import styles from "../styles/Contact.module.scss"
@@ -29,8 +15,10 @@ const Contact = () => {
         email, setEmail,
         message, setMessage,
         privacy, setPrivacy,
-        moduleContact, setModuleContact
+        setModuleContact, moduleContact
      } = useGlobalContext()
+
+     const form = useRef()
 
     const onHandleFirstName = (e) => setFirstName(e.target.value)
     const onHandleLastName = (e) => setLastName(e.target.value)
@@ -55,9 +43,14 @@ const Contact = () => {
         setEmail("")
         setMessage("")
         setPrivacy("")
-    }
 
-    localStorage.setItem("Contact Module", JSON.stringify(moduleContact));
+        emailjs.sendForm('service_afp03sz', 'template_g2t1j2o', form.current, 'vvSqsU-fF1YN9n3dg')
+        .then((result) => {
+            console.log(result.text)
+        }, (error) => {
+            console.log(error.text)
+        })
+    }
 
   return (
     <>
@@ -74,24 +67,24 @@ const Contact = () => {
         height={768}
         alt={"cover"}/>
         <h2>Contact Us</h2>
-        <form onSubmit={onHandleSubmit}>
+        <form ref={form} onSubmit={onHandleSubmit}>
             <div className={styles.field_1}>
-                <input type="text" value={firstName} placeholder="First name" onChange={onHandleFirstName} required/>
-                <input type="text" value={lastName} placeholder="Last name" onChange={onHandleLastName} required/>
+                <input type="text" value={firstName} name="firstName" placeholder="First name" onChange={onHandleFirstName} required/>
+                <input type="text" value={lastName} name="lastName" placeholder="Last name" onChange={onHandleLastName} required/>
             </div>
             <div className={styles.field_2}>
-                <input type="email" value={email} placeholder="Email" onChange={onHandleEmail} required/>
+                <input type="email" value={email} name="email" placeholder="Email" onChange={onHandleEmail} required/>
                 <select name="filter" id="filter-select" className={styles.selectValue} defaultValue="select request" onChange={onHandleOptionValue} >
                     <option value="select request" disabled>Select request</option>
-                    <option value="assistance">Assistance</option>
-                    <option value="product information">Product information</option>
+                    <option value="assistance" name="object">Assistance</option>
+                    <option value="product's info" name="object">Product information</option>
                 </select>
             </div>
-            <textarea placeholder="Insert Message..." id="contact" name="contact" rows="7" cols="50" value={message} onChange={onHandleMessage} required/>
+            <textarea placeholder="Insert Message..." id="contact" name="message" rows="7" cols="50" value={message} onChange={onHandleMessage} required/>
             <div className={styles.field_privacy}>
                 <div className={styles.containerCheckbox}>
                     <input type="checkbox" name="privacy" id="privacy" placeholder="Consent Privacy" onChange={onHandlePrivacy} required/>
-                    <label htmlFor="privacy" value={privacy} required>Consent Privacy</label>
+                    <label htmlFor="privacy" value={privacy} name={privacy} required>Consent Privacy</label>
                 </div>
                 <span>You agree to the <a>terms of use</a> and acknowledge the <a>privacy policy</a></span>
             </div>

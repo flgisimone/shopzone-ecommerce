@@ -83,28 +83,28 @@ const Checkout = () => {
     }
   }, [])
 
-  const form = useRef();
-
   const onHandlePaymentComplete = (e) => {
     e.preventDefault();
     for(const key in localStorage){
-      if(key.startsWith("TotalCart")) localStorage.removeItem(key);
-      if(key.startsWith("CartProduct")) localStorage.removeItem(key);
-      if(key.startsWith("OrderCart")) localStorage.removeItem(key);
+      if(key.startsWith("TotalCart")) localStorage.removeItem(key)
+      if(key.startsWith("CartProduct")) localStorage.removeItem(key)
+      if(key.startsWith("OrderCart")) localStorage.removeItem(key)
     }
   
     setIsLoading(true)
       setTimeout(() => {
           setIsLoading(false);
           window.location.href = "/thankyoupage"
-      }, 1000); 
+      }, 1000);
+
+  const form = useRef()
 
     emailjs.sendForm('service_afp03sz', 'template_j8gbpuf', form.current, 'vvSqsU-fF1YN9n3dg')
     .then((result) => {
-        console.log(result.text);
+        console.log(result.text)
     }, (error) => {
-        console.log(error.text);
-    });
+        console.log(error.text)
+    })
   }  
 
   return (
