@@ -55,8 +55,8 @@ const Contact = () => {
   return (
     <>
     <Head>
-        <title>Contact | TLG Recruiting FE Homework</title>
-        <meta name="description" content="Contact | TLG Recruiting FE Homework" />
+        <title>Contact | Shopzone - Ecommerce</title>
+        <meta name="description" content="Contact | Shopzone - Ecommerce" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
     </Head>

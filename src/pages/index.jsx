@@ -11,8 +11,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Home | TLG Recruiting FE Homework</title>
-        <meta name="description" content="Home | TLG Recruiting FE Homework" />
+        <title>Home | Shopzone - Ecommerce</title>
+        <meta name="description" content="Home | Shopzone - Ecommerce" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

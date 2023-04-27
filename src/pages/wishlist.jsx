@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useGlobalContext } from '@/context';
 
 import Product from '@/components/Product/Product'
@@ -45,8 +45,8 @@ const Wishlist = () => {
   return (
     <>
     <Head>
-      <title>Wishlist | TLG Recruiting FE Homework</title>
-      <meta name="description" content="Wishlist | TLG Recruiting FE Homework" />
+      <title>Wishlist | Shopzone - Ecommerce</title>
+      <meta name="description" content="Wishlist | Shopzone - Ecommerce" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
     </Head>

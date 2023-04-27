@@ -41,9 +41,10 @@
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: space-between;
+            gap: 1rem;
                 
             .product{
-                width: 47.5%;
+                width: 47%;
             }
         }
     }

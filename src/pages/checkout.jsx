@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import Head from 'next/head';
 import Image from 'next/image'
 import emailjs from '@emailjs/browser';
 import { useGlobalContext } from '@/context';
@@ -108,7 +109,14 @@ const Checkout = () => {
   }
 
   return (
-    user ?
+    <>
+    <Head>
+      <title>Women's Clothing | Shopzone - Ecommerce</title>
+      <meta name="description" content="Women's Clothing | Shopzone - Ecommerce" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" />
+    </Head>    
+    {user ?
     <section className={styles.Checkout}>
     <h1>Checkout Order {idOrder}</h1>
     <h2>Total Order: {totalPayment}$</h2>
@@ -249,6 +257,8 @@ const Checkout = () => {
   </section>
   :
   <LoginCheckout />
+  }
+  </>
   )
 }
 

@@ -1,4 +1,5 @@
 import { useGlobalContext } from "@/context"
+import Head from "next/head";
 
 import Product from "@/components/Product/Product"
 import Loader from "@/components/Loader/Loader";
@@ -7,7 +8,7 @@ import { MdReadMore } from 'react-icons/md';
 
 import styles from "../styles/SingleCategory.module.scss"
 
-const MensClothing = ({data}) => {
+const WomensClothing = ({data}) => {
 
     const { showProduct, setShowProduct, isLoading, setIsLoading } = useGlobalContext()
 
@@ -20,12 +21,19 @@ const MensClothing = ({data}) => {
     }
 
   return (
+    <>
+    <Head>
+      <title>Women's Clothing | Shopzone - Ecommerce</title>
+      <meta name="description" content="Women's Clothing | Shopzone - Ecommerce" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
     <section className={styles.categoryPage}>
-        <h1>Men's Clothing</h1>
+        <h1>Women's Clothing</h1>
         <div className={styles.containerCategoryPage}>
             {
                 data
-                .filter(prod => prod.category === "men's clothing")
+                .filter(prod => prod.category === "women's clothing")
                 .slice(0, showProduct)
                 .map(prod => 
                     <div className={styles.productCategory} key={prod.id}>
@@ -47,11 +55,12 @@ const MensClothing = ({data}) => {
                 </button>
             )
         }   
-    </section>
+    </section>       
+    </>
   )
 }
 
-export default MensClothing
+export default WomensClothing
 
 export async function getServerSideProps() {
     const res = await fetch("https://fakestoreapi.com/products");

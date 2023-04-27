@@ -25,7 +25,7 @@ const Footer = () => {
             <div className={styles.column_1}>
                 <Link href={"/"}>
                     <Image
-                    src={"https://i.postimg.cc/ZqLZgBPy/logoipsum-248.png"}
+                    src={"https://i.postimg.cc/qBZyLTQz/logo-86.png"}
                     width={244}
                     height={100}
                     alt={"logo"} />

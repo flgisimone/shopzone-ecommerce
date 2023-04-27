@@ -65,8 +65,8 @@ const Login = () => {
   return (
     <>
     <Head>
-      <title>Login | TLG Recruiting FE Homework</title>
-      <meta name="description" content="Login | TLG Recruiting FE Homework" />
+      <title>Login | Shopzone - Ecommerce</title>
+      <meta name="description" content="Login | Shopzone - Ecommerce" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
     </Head>

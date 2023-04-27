@@ -10,8 +10,8 @@ const Page404 = () => {
   return (
     <>
     <Head>
-      <title>404 Not Found | TLG Recruiting FE Homework</title>
-      <meta name="description" content="Products | TLG Recruiting FE Homework" />
+      <title>404 Not Found | Shopzone - Ecommerce</title>
+      <meta name="description" content="Page Not Found | Shopzone - Ecommerce" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
     </Head>

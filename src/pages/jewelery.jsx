@@ -1,4 +1,5 @@
 import { useGlobalContext } from "@/context"
+import Head from "next/head";
 
 import Product from "@/components/Product/Product"
 import Loader from "@/components/Loader/Loader";
@@ -20,6 +21,13 @@ const Jewelery = ({data}) => {
     }
 
   return (
+    <>
+    <Head>
+      <title>Jewelery | Shopzone - Ecommerce</title>
+      <meta name="description" content="Jewelery | Shopzone - Ecommerce" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
     <section className={styles.categoryPage}>
         <h1>Jewelery</h1>
         <div className={styles.containerCategoryPage}>
@@ -47,7 +55,8 @@ const Jewelery = ({data}) => {
                 </button>
             )
         }   
-    </section>
+    </section>    
+    </>
   )
 }
 

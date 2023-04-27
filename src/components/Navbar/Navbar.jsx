@@ -81,8 +81,8 @@ const Navbar = () => {
             <ul className={openSubMenu ? `${styles.show} ${styles.subUlMenu}` : `${styles.hidden}`}>
               <li onClick={btnClosenMenu}><Link href={"/electronics"}>Electronics</Link></li>
               <li onClick={btnClosenMenu}><Link href={"/jewelery"}>Jewelery</Link></li>
-              <li onClick={btnClosenMenu}><Link href={"/mens_clothing"}>Men's Clothing</Link></li>
-              <li onClick={btnClosenMenu}><Link href={"/womens_clothing"}>Women's Clothing</Link></li>
+              <li onClick={btnClosenMenu}><Link href={"/mens-clothing"}>Men's Clothing</Link></li>
+              <li onClick={btnClosenMenu}><Link href={"/womens-clothing"}>Women's Clothing</Link></li>
             </ul>
             <li onClick={btnClosenMenu}><Link href={"/cart"}>CART</Link></li>
             <li onClick={btnClosenMenu}><Link href={"/wishlist"}>WISHLIST</Link></li>

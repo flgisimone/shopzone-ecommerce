@@ -1,4 +1,5 @@
-import React, { useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
+import Head from 'next/head';
 import { useGlobalContext } from '@/context'
 import Link from 'next/link';
 import Image from 'next/image';
@@ -91,6 +92,13 @@ const Cart = () => {
     }
 
   return (
+    <>
+    <Head>
+      <title>Cart | Shopzone - Ecommerce</title>
+      <meta name="description" content="Cart | Shopzone - Ecommerce" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" />
+    </Head>    
     <section className={styles.Cart}>
       <h1>Your Cart</h1>
       {cart.length > 0 ? (
@@ -176,6 +184,7 @@ const Cart = () => {
         }
       </div> 
     </section>
+    </>
   )
 }
 
