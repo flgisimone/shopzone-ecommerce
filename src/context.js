@@ -1,11 +1,13 @@
 import React, {useState, useContext} from "react";
+import { auth } from '@/firebase'
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const AppContext = React.createContext()
 
 const AppProvider = ({children}) => {
 
     const [user, setUser] = useState()
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [userLogged, setUserLogged] = useState([])
     const [showProduct, setShowProduct] = useState(5)
     const [isLoading, setIsLoading] = useState(false)
     const [favorites, setFavorites] = useState([])
@@ -31,7 +33,7 @@ const AppProvider = ({children}) => {
         <AppContext.Provider value ={
             {
                 user, setUser,
-                isAuthenticated, setIsAuthenticated,
+                userLogged, setUserLogged,
                 showProduct, setShowProduct,
                 isLoading, setIsLoading,
                 favorites, setFavorites,

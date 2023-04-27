@@ -1,20 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import emailjs from '@emailjs/browser';
+import { useGlobalContext } from '@/context';
 
 import LoginCheckout from '@/components/LoginCheckout/LoginCheckout';
 import Loader from '@/components/Loader/Loader';
 
-import { useGlobalContext } from '@/context';
-
 import styles from "../styles/Checkout.module.scss"
-
 
 const Checkout = () => {
 
   const { 
     isLoading, setIsLoading,
-    user, setUser } = useGlobalContext()
+    user, setUser,
+   } = useGlobalContext()
 
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")

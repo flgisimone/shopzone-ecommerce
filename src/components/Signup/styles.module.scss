@@ -17,7 +17,7 @@
             input{
                 padding: .5rem;
                 outline: none;
-                border: 1px solid #242424;
+                border: 1px solid var(--mainColor);
             }
 
             input[type=submit]{
@@ -25,8 +25,8 @@
                 width: fit-content;
                 font-size: 1.1rem;
                 padding: .25rem .5rem;
-                background-color: #242424;
-                color: #FBFBFB;
+                background-color: var(--mainColor);
+                color: var(--tertiary);
                 cursor: pointer;
             }
 

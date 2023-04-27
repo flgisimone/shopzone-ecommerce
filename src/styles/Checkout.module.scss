@@ -48,7 +48,7 @@
     }
 
     .separated{
-        border: 1px solid #FF7A00;
+        border: 1px solid var(--colorBlue);
     }
 
     form{
@@ -128,11 +128,12 @@
 
         input[type=submit]{
             padding: .25rem;
-            background-color: #FF7A00;
+            background-color: var(--secondary);
             border: none;
-            color: white;
+            color: var(--tertiary);
             font-weight: 600;
             font-size: 1rem;
+            cursor: pointer;
         }
     }
 }

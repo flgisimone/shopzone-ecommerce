@@ -15,7 +15,6 @@ const Login = () => {
     loginState, setLoginState,
     activeForm, setActiveForm,
     invalidLogin, setInvalidLogin,
-    
   } = useGlobalContext()
 
   useEffect(() => {

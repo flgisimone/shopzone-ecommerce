@@ -15,7 +15,7 @@
         gap: 1rem;
 
         input{
-            border: 1px solid #242424;
+            border: 1px solid var(--mainColor);
             padding: .35rem;
             border-radius: .25rem; 
             outline: none;
@@ -30,7 +30,7 @@
             select{
                 outline: none;
                 cursor: pointer;
-                border: 1px solid #242424;
+                border: 1px solid var(--mainColor);
             }
         }
 
@@ -38,7 +38,7 @@
             outline: none;
             padding: .5rem 0 0 .5rem;
             resize: none;
-            border: 1px solid #242424;
+            border: 1px solid var(--mainColor);
         }
 
         .field_privacy{
@@ -54,7 +54,7 @@
                 input[type=checkbox]{
                     width: fit-content;
                     cursor: pointer;
-                    border: 1px solid #242424;
+                    border: 1px solid var(--mainColor);
                 }
 
                 label{
@@ -66,7 +66,7 @@
                 font-size: .75rem;
 
                 a{
-                    color: #FF7A00;
+                    color: var(--secondary);
                     font-weight: 600;
                 }
             }
@@ -76,8 +76,8 @@
             width: fit-content;
             padding: .25rem 1rem;
             font-size: 1rem;
-            background-color: #242424;
-            color: #FBFBFB;
+            background-color: var(--mainColor);
+            color: var(--tertiary);
             cursor: pointer;
         }
     }

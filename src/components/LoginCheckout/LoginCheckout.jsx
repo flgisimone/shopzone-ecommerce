@@ -3,7 +3,7 @@ import { useGlobalContext } from "@/context"
 
 import Signup from "@/components/Signup/Signup"
 
-import styles from "./styles.module.scss"
+import styles from "../../styles/Login.module.scss"
 
 const LoginCheckout = () => {
 
@@ -60,7 +60,7 @@ const LoginCheckout = () => {
         }
     }
   }
- 
+
   return (
     <section className={styles.Login}>
       <div className={styles.containerLogin}>

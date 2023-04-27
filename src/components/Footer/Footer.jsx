@@ -1,5 +1,4 @@
 import { useGlobalContext } from '@/context';
-import { useEffect } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -7,12 +6,7 @@ import styles from "./styles.module.scss"
 
 const Footer = () => {
 
-    const { user, setUser } = useGlobalContext()
-
-    useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("user"))
-        if(storedUser) setUser(storedUser.user)
-      }, [])
+    const { userLogged } = useGlobalContext()
 
     const onHandleLogout = () => {
         localStorage.removeItem("email")
@@ -37,7 +31,7 @@ const Footer = () => {
                     alt={"logo"} />
                 </Link>
                 {
-                    user ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
+                    userLogged ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
                 }            
             </div>
             <div className={styles.column_2}>

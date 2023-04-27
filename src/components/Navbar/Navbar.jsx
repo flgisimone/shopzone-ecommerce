@@ -2,6 +2,7 @@ import { useGlobalContext } from '@/context';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { AiOutlineMenu, AiFillCloseCircle } from 'react-icons/ai';
 import { BsHeartFill, BsCartFill } from 'react-icons/bs';
 
@@ -9,14 +10,18 @@ import styles from "./styles.module.scss"
 
 const Navbar = () => {
 
-    const { user, setUser } = useGlobalContext()
+    const { userLogged, setUserLogged } = useGlobalContext(null)
 
     const [openMenu, setOpenMenu] = useState(false)
     const [openSubMenu, setOpenSubMenu] = useState(false)
 
     useEffect(() => {
       const storedUser = JSON.parse(localStorage.getItem("user"))
-      if(storedUser) setUser(storedUser.user)
+      if (storedUser) {
+        setUserLogged(storedUser.user);
+      } else {
+        setUserLogged(null);
+      }
     }, [])
 
     useEffect(() => {
@@ -36,7 +41,7 @@ const Navbar = () => {
         localStorage.removeItem("email")
         localStorage.removeItem("password")
         localStorage.removeItem("user")
-        location.reload()
+        location.href="/"
     }
 
   return (
@@ -45,19 +50,19 @@ const Navbar = () => {
         <div className={styles.logo_user}>
           <Link href={"/"} onClick={btnClosenMenu}>
             <Image
-            src={"https://i.postimg.cc/ZqLZgBPy/logoipsum-248.png"}
+            src={"https://i.postimg.cc/qBZyLTQz/logo-86.png"}
             width={244}
             height={100}
-            alt={"logo"} />
+            alt="logo" />
           </Link>
           {
-            user && 
+            userLogged && 
             <div className={styles.userLogged}>
-              <Image src={user.avatar} 
+              <Image src={userLogged.avatar} 
               width={50}
               height={50}
-              alt={user.name}/>
-              <span>{user.name}</span>
+              alt={userLogged.name}/>
+              <span>{userLogged.name}</span>
             </div>
           }
         </div>
@@ -83,8 +88,8 @@ const Navbar = () => {
             <li onClick={btnClosenMenu}><Link href={"/wishlist"}>WISHLIST</Link></li>
             <li onClick={btnClosenMenu}><Link href={"/contact"}>CONTACT</Link></li>
             {
-              user ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
-            } 
+              userLogged ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button> 
+            }
           </ul>
         </nav>
       </div>
