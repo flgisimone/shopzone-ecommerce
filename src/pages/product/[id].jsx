@@ -62,6 +62,13 @@ const SingleProduct = ({productData}) => {
       }
   }  
 
+  const onHandlePage = () => {
+    if(productData?.category === "electronics") window.location.href = "/electronics"
+    if(productData?.category === "jewelery") window.location.href = "/jewelery"
+    if(productData?.category === "men's clothing") window.location.href = "/mens-clothing"
+    if(productData?.category === "women's clothing") window.location.href = "/womens-clothing"
+  }
+
   const starCreator = (num) => {
     return Array.from({length: 5}, (_, index) => {
       if(num >= index + 1) return <RiStarFill key={index} className={styles.star} fill="#fca903"/>
@@ -73,13 +80,13 @@ const SingleProduct = ({productData}) => {
   return (
     <>
     <Head>
-        <title>{productData?.title}</title>
-        <meta name="description" content={productData?.description} />
+        <title>{productData?.title + " - Shopzone Ecommerce"}</title>
+        <meta name="description" content={productData?.description + "Shopzone Ecommerce"} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
     </Head>
     <section className={styles.SingleProduct}>
-      <Link href={"/products"}><AiOutlineArrowLeft/></Link>
+      <button onClick={onHandlePage}><AiOutlineArrowLeft/></button>
       <div className={styles.containerProduct}>
         <Image 
         src={productData?.image?.includes("https://") ? productData?.image : "https://i.postimg.cc/9XNt59Zb/Image-not-available.png"}

@@ -33,7 +33,6 @@ const WomensClothing = ({data}) => {
         <div className={styles.containerCategoryPage}>
             {
                 data
-                .filter(prod => prod.category === "women's clothing")
                 .slice(0, showProduct)
                 .map(prod => 
                     <div className={styles.productCategory} key={prod.id}>
@@ -63,7 +62,7 @@ const WomensClothing = ({data}) => {
 export default WomensClothing
 
 export async function getServerSideProps() {
-    const res = await fetch("https://fakestoreapi.com/products");
+    const res = await fetch("https://fakestoreapi.com/products/category/women's%20clothing");
     const data = await res.json();
   
     return {

@@ -14,17 +14,16 @@
 
     .ContainerMenu{
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        align-items: self-start;
 
         .logo_user{
             display: flex;
-            align-items: center;
+            align-self: flex-start;
             gap: .5rem;
 
             a{
                 display: flex;
-                align-self: flex-start;
                 
                 img{
                     width: 100%;
@@ -34,7 +33,7 @@
 
             .userLogged{
                 display: flex;
-                align-items: flex-start;
+                align-items: center;
                 gap: .5rem;
 
                 img{
@@ -81,26 +80,30 @@
                     }
                 }
 
-                .subMenu{
-                    display: flex;
-                    align-items: center;
-                    border-right: 2px solid var(--secondary);
-                    padding-right: .5rem;
-                    cursor: pointer;
-                }
-
-                .subUlMenu{
+                .containerSubMenu{
                     display: flex;
                     flex-direction: column;
-                    list-style-type: none;
-                    border-right: 1px solid var(--secondary);
-                    padding-right: .5rem;
-                    gap: .25rem;
-                    
-                    li{
-                        a{
-                            color: gray;
-                            font-size: .85rem;
+                    gap: .5rem;
+
+                    .subMenu{
+                        border-right: 2px solid var(--secondary);
+                        padding-right: .5rem;
+                        font-size: 1rem;
+                        cursor: pointer;
+                    }
+
+                    .subUlMenu{
+                        border-right: 1px solid var(--secondary);
+                        padding-right: .5rem;
+                        list-style-type: none;
+                        margin: .25rem 0;
+                        gap: .25rem;
+                        
+                        li{
+                            a{
+                                color: gray;
+                                font-size: 1rem;
+                            }
                         }
                     }
                 }
@@ -122,14 +125,6 @@
                     background-color: transparent;
                     border: none;
                     font-size: 1.6rem;
-
-                    .btnCloseMenu{
-                        display: none;
-                    }
-
-                    i{
-                        font-size: 1.6rem;
-                    }
                 }
             }
         }
@@ -140,21 +135,227 @@
 
     .Menu{
         .ContainerMenu{
-            img{
-                width: 5.5%;
-                height: 5.5%;
+            .logo_user{
+                display: flex;
+                gap: 1rem;
+    
+                a{
+                    img{
+                        height: 3rem;
+                    }
+                }
+    
+                .userLogged{
+                    img{
+                        width: 2.5rem;
+                        height: 2.5rem;
+                    }
+    
+                    span{
+                        font-size: 1.2rem;
+                        align-self: center;
+                    }
+                }
             }
     
             nav{
-                display: flex;
-                flex-direction: row-reverse;
+                .containerLink_wishlist_cart{
+                    a{
+                        font-size: 2rem;
+                    }
+                }
                 
+                .ulMenu{
+                    li{
+                        a{
+                            font-size: 1.25rem;
+                        }
+                    }
+    
+                    .containerSubMenu{    
+                        .subMenu{
+                            font-size: 1.25rem;
+                        }
+    
+                        .subUlMenu{                            
+                            li{
+                                a{
+                                    color: gray;
+                                    font-size: 1.15rem;
+                                }
+                            }
+                        }
+                    }
+    
+                    button{
+                        font-size: 1.25rem;
+                    }
+                }
+    
+                .containerBtn{
+                    button{
+                        font-size: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    .show{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .hidden{
+        display: none;
+    }
+
+    .Menu{
+        .ContainerMenu{
+            .logo_user{
+                gap: 1rem;
+
+                a{                    
+                    img{
+                        height: 3rem;
+                    }
+                }
+
+                .userLogged{
+                    img{
+                        width: 2.5rem;
+                        height: 2.5rem;
+                    }
+
+                    span{
+                        font-size: 1.25rem;
+                    }
+                }
+            }
+
+            nav{
+                display: flex;
+                flex-direction: row;
+                gap: 2rem;
+
+                .containerLink_wishlist_cart{     
+                    align-self: flex-start;
+    
+                    a{
+                        font-size: 1.8rem;
+                    }
+                }
+
                 .ulMenu{
                     display: flex;
                     flex-direction: row;
                     gap: 1rem;
-                }
+
+                    li{
+                        a{
+                            font-size: 1.25rem;
+                        }
+                    }
+
+                    .containerSubMenu{
+                        display: flex;
+                        flex-direction: column;
+                        gap: .5rem;
+
+                        .subMenu{
+                            border-right: 0px;
+                            border-bottom: 2px solid var(--secondary);
+                            padding-right: 0rem;
+                            font-size: 1.25rem;
+                        }
     
+                        .subUlMenu{
+                            border-right: 0rem;
+                            padding-right: 0rem;
+                            margin: 0rem;
+                            gap: 0rem;
+
+                            li a{
+                                font-size: .85rem;
+                            }
+                        }
+                    }
+
+                    button{
+                        font-size: 1rem;
+                        align-self: flex-start;
+                    }
+                }
+
+                .containerBtn{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    .Menu{
+        .ContainerMenu{
+            .logo_user{
+                a{                    
+                    img{
+                        height: 2.5rem;
+                    }
+                }
+
+                .userLogged{
+                    img{
+                        width: 2rem;
+                        height: 2rem;
+                    }
+                }
+            }
+
+            nav{
+                .containerLink_wishlist_cart{
+                    a{
+                        font-size: 1.5rem;
+                    }
+                }
+
+                .ulMenu{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1rem;
+
+                    li{
+                        a{
+                            font-size: 1rem;
+                        }
+                    }
+
+                    .containerSubMenu{
+                        .subMenu{
+                            font-size: 1rem;
+                        }
+    
+                        .subUlMenu{
+
+                            li a{
+                                font-size: .9rem;
+                            }
+                        }
+                    }
+
+                    button{
+                        font-size: 1rem;
+                        align-self: flex-start;
+                    }
+                }
+
                 .containerBtn{
                     display: none;
                 }

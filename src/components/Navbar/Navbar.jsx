@@ -62,7 +62,7 @@ const Navbar = () => {
               width={50}
               height={50}
               alt={userLogged.name}/>
-              <span>{userLogged.name}</span>
+              <span>Hi, {userLogged.name}!</span>
             </div>
           }
         </div>
@@ -77,13 +77,15 @@ const Navbar = () => {
           </div>
           <ul className={openMenu ? `${styles.ulMenu} ${styles.show}` : `${styles.ulMenu} ${styles.hidden}`} role="menu">
             <li onClick={btnClosenMenu}><Link href={"/"}>HOME</Link></li>
-            <li onClick={btnSubMenu} className={styles.subMenu}>CATEGORIES</li>
-            <ul className={openSubMenu ? `${styles.show} ${styles.subUlMenu}` : `${styles.hidden}`}>
-              <li onClick={btnClosenMenu}><Link href={"/electronics"}>Electronics</Link></li>
-              <li onClick={btnClosenMenu}><Link href={"/jewelery"}>Jewelery</Link></li>
-              <li onClick={btnClosenMenu}><Link href={"/mens-clothing"}>Men's Clothing</Link></li>
-              <li onClick={btnClosenMenu}><Link href={"/womens-clothing"}>Women's Clothing</Link></li>
-            </ul>
+            <div className={styles.containerSubMenu}>
+              <li onClick={btnSubMenu} className={styles.subMenu}>CATEGORIES</li>
+              <ul className={openSubMenu ? `${styles.show} ${styles.subUlMenu}` : `${styles.hidden}`}>
+                <li onClick={btnClosenMenu}><Link href={"/electronics"}>Electronics</Link></li>
+                <li onClick={btnClosenMenu}><Link href={"/jewelery"}>Jewelery</Link></li>
+                <li onClick={btnClosenMenu}><Link href={"/mens-clothing"}>Men's Clothing</Link></li>
+                <li onClick={btnClosenMenu}><Link href={"/womens-clothing"}>Women's Clothing</Link></li>
+              </ul>
+            </div>
             <li onClick={btnClosenMenu}><Link href={"/cart"}>CART</Link></li>
             <li onClick={btnClosenMenu}><Link href={"/wishlist"}>WISHLIST</Link></li>
             <li onClick={btnClosenMenu}><Link href={"/contact"}>CONTACT</Link></li>
