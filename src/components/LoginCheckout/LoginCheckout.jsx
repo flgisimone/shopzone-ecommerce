@@ -1,13 +1,7 @@
-/*import Head from "next/head"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useGlobalContext } from "@/context"
-import { auth } from "@/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
-import GoogleButton from 'react-google-button'
 
 import Signup from "@/components/Signup/Signup"
-import Loader from '@/components/Loader/Loader';
 
 import styles from "./styles.module.scss"
 
@@ -19,34 +13,14 @@ const LoginCheckout = () => {
     password, setPassword,
     loginState, setLoginState,
     activeForm, setActiveForm,
-    invalidLogin, setInvalidLogin
+    invalidLogin, setInvalidLogin,
   } = useGlobalContext()
-
-  const [userGoogle, loading] = useAuthState(auth)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/users")
     .then(res => res.json())
     .then(data => setUsers(data))
   }, [])
-
-  const googleSignIn = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider)
-  }
-
-  useEffect(() => {
-    if (userGoogle){
-      setIsAuthenticated(true)
-      localStorage.setItem("nameGoogle", userGoogle.displayName)
-      localStorage.setItem("imageGoogle", userGoogle.photoURL)
-    }
-  }, [])
-
-  if (loading) {
-    return <Loader />
-  } 
 
   const onHandleEmail = (e) =>{
     setLoginState((prev) => ({...prev, email: e.target.value}))
@@ -58,13 +32,8 @@ const LoginCheckout = () => {
     setPassword(e.target.value)
   }
 
-  const onHandleShowSignUp = () => {
-    setActiveForm(false)
-  }
-
-  const onHandleShowLogin = () => {
-    setActiveForm(true)
-  }
+  const onHandleShowSignUp = () => setActiveForm(false)
+  const onHandleShowLogin = () => setActiveForm(true)
 
   const onFormSubmit = (e) => {
     e.preventDefault()
@@ -81,6 +50,7 @@ const LoginCheckout = () => {
               localStorage.setItem("email", JSON.stringify({ email: loginState.email, emailUser: user.email }))
               localStorage.setItem("password", JSON.stringify({ password: loginState.password, passwordUser: user.password }))
               userFound = true
+              window.location.href = "/checkout";
             } 
         })
         if (!userFound) {
@@ -108,7 +78,6 @@ const LoginCheckout = () => {
               {invalidLogin && <p className={styles.invalidLogin}>{invalidLogin}</p>}
               <input type="submit" value="Login" />
             </form>
-            <GoogleButton onClick={googleSignIn} />
           </div>
           <div className={!activeForm ? `${styles.formSignUp} ${styles.show} ${styles.show}` : `${styles.formSignUp} ${styles.hidden}`}>
             <Signup />
@@ -119,4 +88,4 @@ const LoginCheckout = () => {
   )
 }
 
-export default LoginCheckout*/
+export default LoginCheckout

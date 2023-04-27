@@ -8,7 +8,7 @@ import Loader from '@/components/Loader/Loader';
 import { useGlobalContext } from '@/context';
 
 import styles from "../styles/Checkout.module.scss"
-import Login from './login';
+
 
 const Checkout = () => {
 
@@ -249,7 +249,7 @@ const Checkout = () => {
     </form>
   </section>
   :
-  <Login />
+  <LoginCheckout />
   )
 }
 
