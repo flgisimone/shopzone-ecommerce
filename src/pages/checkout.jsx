@@ -1,23 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import emailjs from '@emailjs/browser';
-import { auth } from '@/firebase'
-import { useAuthState } from "react-firebase-hooks/auth";
-import Login from './login';
+
+import LoginCheckout from '@/components/LoginCheckout/LoginCheckout';
 import Loader from '@/components/Loader/Loader';
 
 import { useGlobalContext } from '@/context';
 
 import styles from "../styles/Checkout.module.scss"
+import Login from './login';
 
 const Checkout = () => {
 
   const { 
     isLoading, setIsLoading,
     user, setUser } = useGlobalContext()
-
-    const [userGoogle, loading] = useAuthState(auth)
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
@@ -38,17 +35,12 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    if (userGoogle) setIsAuthenticated(true)
-  }, [userGoogle])
-
-
-  useEffect(() => {
     if (localStorage.getItem("email") && localStorage.getItem("password")) {
       setUser(JSON.parse(localStorage.getItem("email")).email);
       setUser(JSON.parse(localStorage.getItem("password")).password);
     }
     setIsLoading(false)
-  }, []); 
+  }, []);
   
   useEffect(() => {
     const emailMessage = []
@@ -104,7 +96,7 @@ const Checkout = () => {
   
     setIsLoading(true)
       setTimeout(() => {
-          setIsLoading(false);
+          setIsLoading(false)
           window.location.href = "/thankyoupage"
       }, 1000);
 
@@ -115,13 +107,9 @@ const Checkout = () => {
         console.log(error.text)
     })
   }
-  
-  if (loading) {
-    return <Loader />
-  }
 
   return (
-    user || isAuthenticated ? 
+    user ?
     <section className={styles.Checkout}>
     <h1>Checkout Order {idOrder}</h1>
     <h2>Total Order: {totalPayment}$</h2>

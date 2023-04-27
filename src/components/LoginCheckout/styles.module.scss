@@ -1,0 +1,90 @@
+.show{
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden{
+    display: none;
+}
+
+.active{
+    font-weight: 600;
+    background-color: #FF7A00;
+    color: #242424;
+}
+
+.Login{
+    width: 100%;
+    
+    .containerLogin{
+        width: 100%;
+        background-image: url("https://i.postimg.cc/bNq090Vs/background.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;    
+        margin: auto;
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+        background-color: #FBFBFB;
+        padding: 1rem 2rem;
+        border-radius: .25rem;
+
+        span{
+            text-align: center;
+            font-size: 1.25rem;
+            color: #242424;
+            font-weight: 600;
+        }
+
+        .chooseForm{
+            width: 100%;
+            button{
+                width: 50%;
+                border: none;
+                padding: .35rem 0;
+                font-size: 1.15rem;
+                font-weight: 500;
+            }
+        }
+
+        .containerForm{
+            gap: 4rem;
+            width: 100%;
+
+            .formLogin{
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                justify-content: center;
+
+                h1{
+                    color: #242424;
+                    font-size: 1.25rem;
+                }
+
+                form{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+
+                    input{
+                        padding: .5rem;
+                        outline: none;
+                        border: 1px solid #242424;
+                    }
+
+                    input[type=submit]{
+                        margin: auto;
+                        font-size: 1.1rem;
+                        padding: .25rem .5rem;
+                        background-color: #242424;
+                        color: #FBFBFB;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

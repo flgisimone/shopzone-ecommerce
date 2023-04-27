@@ -15,7 +15,7 @@ const Contact = () => {
         email, setEmail,
         message, setMessage,
         privacy, setPrivacy,
-        setModuleContact, moduleContact
+        setModuleContact
      } = useGlobalContext()
 
      const form = useRef()

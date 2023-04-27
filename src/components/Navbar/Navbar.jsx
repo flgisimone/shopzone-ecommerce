@@ -2,9 +2,6 @@ import { useGlobalContext } from '@/context';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router'
-import { auth } from '@/firebase';
-import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineMenu, AiFillCloseCircle } from 'react-icons/ai';
 import { BsHeartFill, BsCartFill } from 'react-icons/bs';
 
@@ -12,61 +9,34 @@ import styles from "./styles.module.scss"
 
 const Navbar = () => {
 
-  const router = useRouter()
+    const { user, setUser } = useGlobalContext()
 
-    const { user } = useGlobalContext()
-
-    const [userGoogle] = useAuthState(auth)
     const [openMenu, setOpenMenu] = useState(false)
     const [openSubMenu, setOpenSubMenu] = useState(false)
-    const [userLogged, setUserLogged] = useState([])
 
     useEffect(() => {
-      const userLogged = JSON.parse(localStorage.getItem("user"))
-      if(userLogged) setUserLogged(userLogged)
+      const storedUser = JSON.parse(localStorage.getItem("user"))
+      if(storedUser) setUser(storedUser.user)
     }, [])
 
     useEffect(() => {
       const handleOutsideClick = (event) => {
-        if (event.target.closest(`.${styles.Menu}`) === null) {
-          setOpenMenu(false);
-        }
-      };
-  
-      if (openMenu) {
-        document.body.addEventListener("click", handleOutsideClick);
+        if (event.target.closest(`.${styles.Menu}`) === null) setOpenMenu(false)
       }
-  
-      return () => {
-        document.body.removeEventListener("click", handleOutsideClick);
-      };
+      if (openMenu) document.body.addEventListener("click", handleOutsideClick)
+      return () => document.body.removeEventListener("click", handleOutsideClick)
     }, [openMenu]);
 
-    const btnOpenMenu = () =>{
-        setOpenMenu(true)
-    }
+    const btnOpenMenu = () => setOpenMenu(true)
+    const btnClosenMenu = () =>setOpenMenu(false)
+    const btnSubMenu = () =>  setOpenSubMenu(prev => !prev)
 
-    const btnClosenMenu = () =>{
-        setOpenMenu(false)
-    }
-
-    const btnSubMenu = () => {
-      setOpenSubMenu(prev => !prev)
-    }
-
+    const onHandleLogin = () => location.href="/login"
     const onHandleLogout = () => {
         localStorage.removeItem("email")
         localStorage.removeItem("password")
-        location.href="/"
-
-        auth.signOut().then(() => {
-          router.push("/");
-        });
+        localStorage.removeItem("user")
         location.reload()
-    }
-
-    const onHandleLogin = () => {
-      location.href="/login"
     }
 
   return (
@@ -80,14 +50,16 @@ const Navbar = () => {
             height={100}
             alt={"logo"} />
           </Link>
-          <div className={styles.userLogged}>
-            <Image
-            src={userLogged?.user?.avatar}
-            width={50}
-            height={50}
-            alt={"logo"} />
-            <span>Hi, {userLogged?.user?.name}</span>
-          </div>
+          {
+            user && 
+            <div className={styles.userLogged}>
+              <Image src={user.avatar} 
+              width={50}
+              height={50}
+              alt={user.name}/>
+              <span>{user.name}</span>
+            </div>
+          }
         </div>
         <nav>
           <div className={styles.containerLink_wishlist_cart}>
@@ -111,8 +83,8 @@ const Navbar = () => {
             <li onClick={btnClosenMenu}><Link href={"/wishlist"}>WISHLIST</Link></li>
             <li onClick={btnClosenMenu}><Link href={"/contact"}>CONTACT</Link></li>
             {
-              user || userGoogle ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
-            }
+              user ? <button onClick={onHandleLogout}>Logout</button> : <button onClick={onHandleLogin}>Login</button>
+            } 
           </ul>
         </nav>
       </div>

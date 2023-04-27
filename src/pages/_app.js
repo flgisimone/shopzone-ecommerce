@@ -6,6 +6,9 @@ import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }) {
 
+  const arr = undefined;
+
+
   return (
     <AppProvider>
       <Layout>
