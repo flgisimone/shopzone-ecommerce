@@ -18,10 +18,6 @@
             font-size: 1.5rem;
             gap: .5rem;
             text-decoration: none;
-
-            span{
-                font-size: .9rem;
-            }
         }
     }
 
@@ -50,20 +46,76 @@
     }
 }
 
-@media screen and (min-width: 1500px) {
-    .Category{
+@media screen and (min-width: 768px){
+    .Category{  
+        .headerCategory{    
+            h3{
+                font-size: 1.5rem;
+            }
     
-        .subContainerCategory{
-            flex-direction: row;
-            gap: 4rem;
-
-            .goToPage{
+            a{
                 font-size: 2rem;
             }
-
-            .containerCategoryProduct{                    
+        }
+    
+        .subContainerCategory{
+            .goToPage{
+                font-size: 1.5rem;
+                display: flex;
+            }
+    
+            .containerCategoryProduct{
+                gap: 2rem;
+                    
                 .product{
-                    width: 24%;
+                    width: 47.5%;
+                    
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .Category{
+        margin: 1.5rem 0;
+
+        .headerCategory{    
+            h3{
+                font-size: 1.5rem;
+            }
+    
+            a{
+                font-size: 2rem;
+            }
+        }
+
+        .subContainerCategory{
+            .containerCategoryProduct{                   
+                .product{
+                    width: 48.5%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1500px){
+    .Category{
+        .headerCategory{    
+            h3{
+                font-size: 1.5rem;
+            }
+    
+            a{
+                font-size: 1.75rem;
+            }
+        }
+
+        .subContainerCategory{
+            .containerCategoryProduct{                   
+                .product{
+                    width: 23.5%;
                 }
             }
         }

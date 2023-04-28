@@ -51,7 +51,11 @@ const Login = () => {
               localStorage.setItem("email", JSON.stringify({ email: loginState.email, emailUser: user.email }))
               localStorage.setItem("password", JSON.stringify({ password: loginState.password, passwordUser: user.password }))
               userFound = true
-              window.location.href = "/";
+              if (window.location.pathname.includes("/checkout")) {
+                window.location.reload();
+              } else {
+                window.location.href = "/";
+              }
             } 
         })
         if (!userFound) {

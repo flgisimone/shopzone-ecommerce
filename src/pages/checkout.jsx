@@ -4,7 +4,7 @@ import Image from 'next/image'
 import emailjs from '@emailjs/browser';
 import { useGlobalContext } from '@/context';
 
-import LoginCheckout from '@/components/LoginCheckout/LoginCheckout';
+import Login from './login';
 import Loader from '@/components/Loader/Loader';
 
 import styles from "../styles/Checkout.module.scss"
@@ -256,7 +256,7 @@ const Checkout = () => {
     </form>
   </section>
   :
-  <LoginCheckout />
+  <Login />
   }
   </>
   )

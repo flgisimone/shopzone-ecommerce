@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import Link from "next/link"
 
 import TopProducts from "../TopProducts/TopProducts";
 import Electronics from "../Electronics/Electronics";
@@ -19,15 +18,34 @@ const CategoryList = () => {
     .then(data => setDataCategory(data))
   }, [])
 
+  const onHandleCategory = () => {
+    if(dataCategory[0] === "electronics") window.location.href = "/electronics"
+    if(dataCategory[1] === "jewelery") window.location.href = "/jewelery"
+    if(dataCategory[2] === "men's clothing") window.location.href = "/mens-clothing"
+    if(dataCategory[3] === "women's clothing") window.location.href = "/womens-clothing"
+  }
 
+  console.log(dataCategory)
 
 return (
   <section className={styles.CategoryList}>
-    <h2>Category</h2>
     <div className={styles.containerCategory}>
-      {
-        dataCategory.map((categoryItem, index) => <Link href={"/"} className={styles.pageCategory} key={index}>{categoryItem}</Link>)
-      }
+        <div className={styles.subcontainerCategory}>
+        <h2>Category</h2>
+        <div className={styles.containerBtnCategory}>
+        {
+          dataCategory.map((categoryItem, index) => 
+          <button className={styles.btnCategory} key={index} onClick={
+            () => {
+              if(index === 0) window.location.href = "/electronics"
+              if(index === 1) window.location.href = "/jewelery"
+              if(index === 2) window.location.href = "/mens-clothing"
+              if(index === 3) window.location.href = "/womens-clothing"
+            }
+          }>{categoryItem}</button>)
+        }
+        </div>
+      </div>
       <TopProducts />
     </div>
     <div className={styles.electronics}>

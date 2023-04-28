@@ -20,7 +20,7 @@ const Jewelery = () => {
     <section className={styles.Category}>
         <div className={styles.headerCategory}>
             <h3>Jewelery</h3>
-            <Link href={"/jewelery"} className={styles.goToPage}><span>Discover more</span><BsFillArrowRightCircleFill /></Link>   
+            <Link href={"/jewelery"} className={styles.goToPage}><BsFillArrowRightCircleFill /></Link>   
         </div>
         <div className={styles.subContainerCategory}>
             <div className={styles.containerCategoryProduct}>

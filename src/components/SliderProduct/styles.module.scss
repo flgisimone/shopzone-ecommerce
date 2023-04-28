@@ -98,4 +98,65 @@
     }
 }
 
+@media screen and (min-width: 768px) {
+    .Product{
+        padding: 1rem 1.5rem;
+    
+        a{            
+            img{
+                height: 8rem;
+            }
+        }
+    
+        .containerInfoProduct{
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+
+            .infoProduct{
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+
+                a{        
+                    h2{
+                        font-size: 1.25rem;
+                    }
+                }
+        
+                a{ 
+                    p{
+                        font-size: 1rem;
+                        line-height: 1.5rem;
+                    }
+                }
+            }
+        
+            .categoryProduct{
+                font-size: 1rem;
+            }
+        
+            .rating{
+                font-size: 1.25rem;
+        
+                .count{
+                    font-size: 1.25rem;
+                }
+            }
+        
+            .actionProduct{
+                span{
+                    font-size: 1.5rem;
+                }
+        
+                .containertn{
+                    button{
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
 

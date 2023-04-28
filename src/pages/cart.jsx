@@ -87,9 +87,7 @@ const Cart = () => {
       localStorage.setItem("TotalCart", (total + tax)?.toFixed(2))
     }, [total])
     
-    const onHandleCheckout = () => {
-      localStorage.setItem('OrderCart', JSON.stringify(cart))
-    }
+    const onHandleCheckout = () =>  localStorage.setItem('OrderCart', JSON.stringify(cart)) 
 
   return (
     <>
@@ -101,59 +99,31 @@ const Cart = () => {
     </Head>    
     <section className={styles.Cart}>
       <h1>Your Cart</h1>
-      {cart.length > 0 ? (
+      {
+      cart.length > 0 ? (
         <div className={styles.containerCart}>
-          <div className={styles.infoProductCart}>
-            <div className={styles.imageProduct}>
-              {
-                cart.map(product =>
-                  <div className={styles.product} key={product.id}>
-                    <Image
-                    src={product.image}
-                    width={50}
-                    height={50}
-                    alt={product.title} 
-                    />
-                  </div>)
+          <div className={styles.containerProduct}>
+            {
+              cart.map(product =>
+                <div className={styles.infoProductCart} key={product.id}>
+                  <Image
+                  src={product.image}
+                  width={50}
+                  height={50}
+                  alt={product.title} 
+                  onClick={() => window.location.href =`/product/${product.id}`}
+                  />
+                  <Link href={`/product/${product.id}`} as={`/product/${product.id}`} title={product.title}>{product.title} </Link>
+                  <span>{product.price}$</span>
+                  <input type="number" 
+                    id={`quantity-${product.id}`} 
+                    name={`quantity-${product.id}`} 
+                    min="1" max="99" 
+                    value={Array.isArray(quantity) && quantity.find((q, i) => cart[i].id === product.id)}
+                    onChange={(e) => onHandleQuantity(product.title, e)} />
+                  <button className={styles.btnRemoveProduct} onClick={() => onHandleRemove(product)}>X</button>                  
+                </div>)
               } 
-            </div>
-            <div className={styles.nameProduct}>
-              {
-                cart.map(product =>
-                  <div className={styles.product} key={product.id}>
-                    <Link href={`/product/${product.id}`} as={`/product/${product.id}`} >{product.title} </Link>
-                  </div>)
-              } 
-              </div>
-              <div className={styles.priceProduct}>
-                {
-                  cart.map(product => 
-                  <div className={styles.product} key={product.id}>
-                    <span>{product.price}$</span>
-                  </div>)
-                } 
-              </div>
-              <div className={styles.quantityProduct}>
-                {
-                  cart.map(product => 
-                  <div className={styles.product} key={product.id}>
-                      <input type="number" 
-                      id={`quantity-${product.id}`} 
-                      name={`quantity-${product.id}`} 
-                      min="1" max="99" 
-                      value={Array.isArray(quantity) && quantity.find((q, i) => cart[i].id === product.id)}
-                      onChange={(e) => onHandleQuantity(product.title, e)} />
-                  </div>)
-                  } 
-              </div>
-              <div className={styles.removeProduct}>
-                {
-                  cart.map(product => 
-                  <div className={styles.product} key={product.id}>
-                    <button className={styles.btnRemoveProduct} onClick={() => onHandleRemove(product)}>X</button>
-                  </div>)
-                } 
-              </div>               
             </div>
             <div className={styles.totalCart}>
               <span>Total {"(TAX incl. 22%)"} </span>
@@ -163,7 +133,7 @@ const Cart = () => {
         </div>       
       ) : 
       (
-        <p>Your cart is empty.</p>
+        <p className={styles.emptyCart}>Your cart is empty.</p>
       )
       }
       <div className={styles.wishlistProducts}>

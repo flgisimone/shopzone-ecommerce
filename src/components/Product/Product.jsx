@@ -72,6 +72,13 @@ const Product = ({data}) => {
     }  
     //--------------------------------
 
+    const onHandlePage = () => {
+      if(data?.category === "electronics") window.location.href = "/electronics"
+      if(data?.category === "jewelery") window.location.href = "/jewelery"
+      if(data?.category === "men's clothing") window.location.href = "/mens-clothing"
+      if(data?.category === "women's clothing") window.location.href = "/womens-clothing"
+    }
+
   return (
     <div className={styles.Product}>
       <Link 
@@ -98,11 +105,11 @@ const Product = ({data}) => {
           <p title={data?.description}>{data?.description}</p>
         </Link>
       </div>
-      <Link href="/" className={styles.categoryProduct}>Category 
+      <button onClick={onHandlePage} className={styles.categoryProduct}>Category 
         <span>
           {data?.category}
         </span>
-      </Link>
+      </button>
       <div className={styles.rating}>
         <span className={styles.rate}>{starCreator(Math.round(data?.rating?.rate))}</span>
         <span className={styles.count}><BsFillPeopleFill />{data?.rating?.count}</span>

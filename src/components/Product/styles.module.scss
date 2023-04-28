@@ -51,6 +51,8 @@
         text-decoration: none;
         display: flex;
         flex-direction: column;
+        background-color: transparent;
+        border: none;
 
         span{
             font-weight: 600;
@@ -91,6 +93,109 @@
                 border: none;
                 font-size: 1.15rem;
                 display: flex;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .Product{
+        padding: 1rem 1.5rem;
+        
+        a{
+            display: flex;
+            
+            img{
+                height: 8rem;
+            }
+        }
+    
+        .infoProduct{
+            a{
+                h2{
+                    font-size: 1.25rem;
+                }
+            }
+    
+            a{ 
+                p{
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                }
+            }
+        }
+    
+        .categoryProduct{
+            font-size: 1rem;
+        }
+    
+        .rating{
+            font-size: 1.25rem;
+        }
+    
+        .actionProduct{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+    
+            span{
+                font-size: 1.5rem;
+            }
+    
+            .containertn{
+                button{
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .Product{
+        padding: .5rem 1rem;
+        
+        a{
+            img{
+                height: 6rem;
+            }
+        }
+    
+        .infoProduct{
+            a{
+                h2{
+                    font-size: 1rem;
+                }
+            }
+    
+            a{ 
+                p{
+                    font-size: .85rem;
+                }
+            }
+        }
+    
+        .categoryProduct{
+            font-size: .85rem;
+        }
+    
+        .rating{
+            font-size: 1rem;
+        }
+    
+        .actionProduct{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+    
+            span{
+                font-size: 1.25rem;
+            }
+    
+            .containertn{
+                button{
+                    font-size: 1.25rem;
+                }
             }
         }
     }

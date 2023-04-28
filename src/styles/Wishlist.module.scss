@@ -20,18 +20,20 @@
                 border-radius: .5rem;
                 border: none;
                 font-weight: 600;
+                color: var(--tertiary)
             }
         }
     }
 
     .containerProduct{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         gap: 1rem;
 
         .product{
             display: flex;
-            flex-direction: column;     
+            flex-direction: column;  
 
             .btnRemove{
                 padding: .5rem 0;
@@ -81,7 +83,7 @@
         .containerProduct{
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start;
 
             .product{
                 width: 32%;
@@ -95,10 +97,9 @@
         .containerProduct{
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: center;
 
             .product{
-                width: 22%;
+                width: 32.5%;
             }
         }
     }

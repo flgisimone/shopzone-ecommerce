@@ -36,6 +36,7 @@
         }
 
         .column_2{
+            width: fit-content;
             list-style-type: none;
             
             h3{
@@ -52,6 +53,8 @@
         }
 
         .column_3{
+            width: fit-content;
+
             ul{
                 list-style-type: none;
 
@@ -69,10 +72,11 @@
         }
 
         .sitemap{
+            width: fit-content;
             list-style-type: none;
 
             h3{
-                color: #242424;
+                color: var(--primary);
                 font-weight: 500;
             }
 
@@ -87,10 +91,115 @@
 }
 
 @media screen and (min-width: 768px) {
-    .Footer{
+    .Footer{    
         .containerFooter{
+            display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            align-items: flex-start;
+
+            .column_1{
+                width: 45%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+  
+                a{
+                    img{
+                        height: 3rem;
+                    }
+                }
+    
+                button{
+                    font-size: 1.25rem;
+                }
+            }
+    
+            .column_2{       
+                ul{
+                    li{
+                        font-size: 1rem;
+                    }
+                }
+            }
+    
+            .column_3{
+                width: 45%;
+
+                ul{
+    
+                    li{
+                        a{
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+    
+            .sitemap{
+                width: 45%;
+
+                li{
+                    a{
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .Footer{
+    
+        .containerFooter{
+            flex-direction: row;
+    
+            .column_1{
+                width: fit-content;
+                align-items: flex-start;
+    
+                a{
+                    img{
+                        height: 2.5rem;
+                    }
+                }
+    
+                button{
+                    font-size: 1rem;
+                }
+            }
+    
+            .column_2{
+                width: fit-content;
+                ul{
+                    li{
+                        font-size: .9rem;
+                    }
+                }
+            }
+    
+            .column_3{
+                width: fit-content;
+
+                ul{
+                    li{
+                        a{
+                            font-size: .8rem;
+                        }
+                    }
+                }
+            }
+    
+            .sitemap{
+                width: fit-content;
+
+                li{
+                    a{
+                        font-size: .8rem;
+                    }
+                }
+            }
         }
     }
 }

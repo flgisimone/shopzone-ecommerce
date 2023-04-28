@@ -5,6 +5,10 @@
     margin: 1rem 0;
     gap: .5rem;
 
+    h3{
+        font-size: 1.5em;
+    }
+
     .containerTopProducts{
         .topProduct{
             margin: auto;
@@ -33,5 +37,28 @@
                 border: none;
             }
         }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .TopProducts{
+        width: 70%;
+        h3{
+            font-size: 1.5rem;
+        }
+
+        .containerTopProducts{
+            .topProduct{        
+                button{
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .TopProducts{
+        margin: 0rem;
     }
 }
