@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { AiOutlineMenu, AiFillCloseCircle } from 'react-icons/ai';
 import { BsHeartFill, BsCartFill } from 'react-icons/bs';
+import { CiMenuKebab } from 'react-icons/ci';
 
 import styles from "./styles.module.scss"
 
@@ -78,7 +79,7 @@ const Navbar = () => {
           <ul className={openMenu ? `${styles.ulMenu} ${styles.show}` : `${styles.ulMenu} ${styles.hidden}`} role="menu">
             <li onClick={btnClosenMenu}><Link href={"/"}>HOME</Link></li>
             <div className={styles.containerSubMenu}>
-              <li onClick={btnSubMenu} className={styles.subMenu}>CATEGORIES</li>
+              <li onClick={btnSubMenu} className={styles.subMenu}>CATEGORIES <CiMenuKebab /></li>
               <ul className={openSubMenu ? `${styles.show} ${styles.subUlMenu}` : `${styles.hidden}`}>
                 <li onClick={btnClosenMenu}><Link href={"/electronics"}>Electronics</Link></li>
                 <li onClick={btnClosenMenu}><Link href={"/jewelery"}>Jewelery</Link></li>

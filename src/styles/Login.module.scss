@@ -89,3 +89,17 @@
         }
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .Login{
+        width: 50%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .Login{
+        width: 35%;
+        margin: auto;
+    }
+}

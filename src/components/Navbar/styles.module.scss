@@ -86,10 +86,10 @@
                     gap: .5rem;
 
                     .subMenu{
-                        border-right: 2px solid var(--secondary);
-                        padding-right: .5rem;
                         font-size: 1rem;
                         cursor: pointer;
+                        display: flex;
+                        align-items: center;
                     }
 
                     .subUlMenu{
@@ -268,8 +268,6 @@
                         gap: .5rem;
 
                         .subMenu{
-                            border-right: 0px;
-                            border-bottom: 2px solid var(--secondary);
                             padding-right: 0rem;
                             font-size: 1.25rem;
                         }
