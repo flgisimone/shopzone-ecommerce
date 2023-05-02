@@ -26,6 +26,7 @@ const AppProvider = ({children}) => {
     const [data, setData] = useState()
     const [cart, setCart] = useState([])
     const [cartProduct, setCartProduct] = useState([])
+    const [searchValue, setSearchValue] = useState("")
 
     return(
         <AppContext.Provider value ={
@@ -51,7 +52,8 @@ const AppProvider = ({children}) => {
                 userPost, setUserPost,
                 data, setData,
                 cart, setCart,
-                cartProduct, setCartProduct
+                cartProduct, setCartProduct,
+                searchValue, setSearchValue
             }
         }>
             {children}

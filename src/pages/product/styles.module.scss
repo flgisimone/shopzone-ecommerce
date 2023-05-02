@@ -16,11 +16,13 @@
         display: flex;
         flex-direction: column;
         gap: 2rem;
+        justify-content: space-between;
 
         img{
-            width: 100%;
+            width: 80%;
             height: 12rem;
             object-fit: contain;
+            align-self: center;
         }
 
         .infoProduct{
@@ -110,10 +112,6 @@
         }   
 
         .containerProduct{
-            img{
-
-            }
-
             .infoProduct{
                 .containerDescription{
                     h4{
@@ -160,10 +158,13 @@
             flex-direction: row;
 
             img{
-                height: 24rem;
+                height: 70%;
+                align-self: flex-start;
             }
 
             .infoProduct{
+                width: 80%;
+
                 .containerDescription{
                     h4{
                         font-size: 1.5rem;
@@ -191,14 +192,16 @@
     .SingleProduct{   
         .containerProduct{
             display: flex;
-            flex-direction: row;
+            justify-content: space-between;
 
             img{
-                width: 70%;
-                height: 32rem;
+                width: 50%;
             }
 
             .infoProduct{
+                height: fit-content;
+                width: 50%;
+                
                 .containerDescription{
                     h4{
                         font-size: 1.3rem;

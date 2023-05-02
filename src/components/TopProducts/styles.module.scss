@@ -25,18 +25,6 @@
                 font-size: 1.5rem;
             }
         }
-
-        .containerCircleSlide{
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-
-            button{
-                display: flex;
-                background-color: transparent;
-                border: none;
-            }
-        }
     }
 }
 
@@ -60,5 +48,17 @@
 @media screen and (min-width: 1200px) {
     .TopProducts{
         margin: 0rem;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .TopProducts{
+        .containerTopProducts{
+            .topProduct{
+                button{
+                    font-size: 1.75rem;
+                }
+            }
+        }
     }
 }

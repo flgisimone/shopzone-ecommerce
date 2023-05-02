@@ -75,3 +75,16 @@
         }
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .CategoryList{
+        .containerCategory{
+            flex-direction: row;
+            justify-content: space-evenly;
+    
+            .subcontainerCategory{
+                width: 20%;
+            }
+        }
+    }
+}

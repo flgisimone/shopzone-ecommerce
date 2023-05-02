@@ -29,7 +29,7 @@
                 }
     
                 a{
-                    width: 65rem;
+                    width: 25rem;
                     text-decoration: none;
                     display: -webkit-box;
                     -webkit-box-orient: vertical;
@@ -41,17 +41,6 @@
                     width: 10rem;
                     font-size: 1rem;
                     text-align: right;
-                }
-    
-                .totalCart{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-end;
-                    gap: .5rem;
-        
-                    span{
-                        font-size: 1rem;
-                    }
                 }
 
                 input[type=number]{                
@@ -118,6 +107,164 @@
             .product{
                 width: 10rem;
                 padding-bottom: 1rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .Cart{
+        h1{
+            font-size: 2.25rem;
+        }
+
+        .containerCart{
+            .containerProduct{
+                .infoProductCart{
+                    img{
+                        width: 3rem;
+                    }
+        
+                    a{
+                        width: 35rem;
+                        font-size: 1.25rem;
+                        margin: 0 1rem;
+                    }
+        
+                    span{
+                        text-align: center;
+                        width: 15rem;
+                        font-size: 1.25rem;
+                    }
+
+                    input[type=number]{                
+                        font-size: 1.25rem;
+                    }
+
+                    button{
+                        font-size: 1.25rem
+                    }
+                }
+            }
+
+            .totalCart{
+                span{
+                    font-size: 1.25rem;
+                }
+
+                h2{
+                    font-size: 2rem;
+                }
+
+                a{
+                    font-size: 1.25rem;
+                    
+                    svg{
+                        font-size: 1.25rem;
+                    }
+                }
+            }
+        }
+        
+        .wishlistProducts{
+            h3{
+                font-size: 2rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .Cart{
+        h1{
+            font-size: 1.75rem;
+        }
+
+        .containerCart{
+            .containerProduct{
+                .infoProductCart{
+                    a{
+                        font-size: 1.1rem;
+                    }
+        
+                    span{
+                        font-size: 1.1rem;
+                    }
+
+                    input[type=number]{                
+                        font-size: 1.1rem;
+                    }
+
+                    button{
+                        font-size: 1.1rem
+                    }
+                }
+            }
+
+            .totalCart{
+                span{
+                    font-size: 1.1rem;
+                }
+
+                h2{
+                    font-size: 1.75rem;
+                }
+
+                a{
+                    font-size: 1.1rem;
+                    
+                    svg{
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+        }
+        
+        .wishlistProducts{
+            h3{
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .Cart{
+        h1{
+            font-size: 1.75rem;
+        }
+
+        .containerCart{
+            .containerProduct{
+                .infoProductCart{
+                    a{
+                        width: 65rem;
+                    }
+                }
+            }
+
+            .totalCart{
+                span{
+                    font-size: 1rem;
+                }
+
+                h2{
+                    font-size: 1.5rem;
+                }
+
+                a{
+                    font-size: 1rem;
+                    
+                    svg{
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+        
+        .wishlistProducts{
+            h3{
+                font-size: 1.5rem;
             }
         }
     }

@@ -111,8 +111,8 @@ const Checkout = () => {
   return (
     <>
     <Head>
-      <title>Women's Clothing | Shopzone - Ecommerce</title>
-      <meta name="description" content="Women's Clothing | Shopzone - Ecommerce" />
+      <title>Checkout | Shopzone - Ecommerce</title>
+      <meta name="description" content="Checkout | Shopzone - Ecommerce" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
     </Head>    
@@ -250,9 +250,10 @@ const Checkout = () => {
             required autoComplete='off'/>              
           </div>
         </div>
+        {isLoading ? 
+        <Loader /> : 
+        <input type="submit" value="Complete Order"/>}
       </fieldset>
-      {isLoading ? <Loader /> : 
-      <input type="submit" value="Complete Order"/>}
     </form>
   </section>
   :

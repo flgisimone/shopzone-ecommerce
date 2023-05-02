@@ -4,6 +4,7 @@ import { useGlobalContext } from '@/context'
 import Link from 'next/link';
 import Image from 'next/image';
 
+import Searchbar from '@/components/Searchbar/Searchbar';
 import FavoriteProduct from '@/components/FavoriteProduct/FavoriteProduct';
 
 import { IoIosArrowDroprightCircle } from 'react-icons/io';
@@ -14,7 +15,8 @@ const Cart = () => {
   
   const {
     cart, setCart,
-    favorites, setFavorites 
+    favorites, setFavorites,
+    searchValue 
   } = useGlobalContext()
     
     const [total, setTotal] = useState(0)
@@ -138,11 +140,15 @@ const Cart = () => {
       }
       <div className={styles.wishlistProducts}>
         <h3>Your Wishlist</h3>
+        <Searchbar />
         {
           favorites.length > 0 ? 
           <div className={styles.listFavorite}>
+
             {
-              favorites.map((product) => 
+              favorites?.
+              filter(product => product?.title?.toLowerCase().includes(searchValue?.toLowerCase()))
+              .map((product) => 
               <div className={styles.product} key={product.id}>
                 <FavoriteProduct data={product}/>
               </div>
