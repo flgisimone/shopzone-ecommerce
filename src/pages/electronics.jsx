@@ -1,22 +1,26 @@
 import { useGlobalContext } from "@/context"
-import Head from "next/head";
+import Head from "next/head"
 
 import Product from "@/components/Product/Product"
-import Loader from "@/components/Loader/Loader";
+import Loader from "@/components/Loader/Loader"
+import Searchbar from "@/components/Searchbar/Searchbar"
 
-import { MdReadMore } from 'react-icons/md';
+import { MdReadMore } from 'react-icons/md'
 
 import styles from "../styles/SingleCategory.module.scss"
 
 const Electronics = ({data}) => {
 
-    const { showProduct, setShowProduct, isLoading, setIsLoading } = useGlobalContext()
+    const { showProduct, setShowProduct, 
+        isLoading, setIsLoading,
+        searchValue 
+    } = useGlobalContext()
 
     const handleLoadMore = () => {
-        setIsLoading(true);
+        setIsLoading(true)
         setTimeout(() => {
-            setIsLoading(false);
-            setShowProduct(showProduct + 10);
+            setIsLoading(false)
+            setShowProduct(showProduct + 10)
         }, 500); 
     }
 
@@ -30,9 +34,11 @@ const Electronics = ({data}) => {
     </Head>
     <section className={styles.categoryPage}>
         <h1>Electronics</h1>
+        <Searchbar />
         <div className={styles.containerCategoryPage}>
             {
                 data
+                .filter(prod => prod?.title?.toLowerCase().includes(searchValue?.toLowerCase()))
                 .slice(0, showProduct)
                 .map(prod => 
                     <div className={styles.productCategory} key={prod.id}>

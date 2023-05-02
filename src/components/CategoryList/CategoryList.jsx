@@ -25,8 +25,6 @@ const CategoryList = () => {
     if(dataCategory[3] === "women's clothing") window.location.href = "/womens-clothing"
   }
 
-  console.log(dataCategory)
-
 return (
   <section className={styles.CategoryList}>
     <div className={styles.containerCategory}>
